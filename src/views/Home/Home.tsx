@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { PokemonList, IPokemon } from "../../modules/PokemonList";
+import { IPokemon } from "../../models";
+import { PokemonList } from "../../modules/PokemonList";
 import pokemonService from "../../services/PokemonService";
 
 interface IHomeViewState {

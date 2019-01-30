@@ -1,3 +1,15 @@
+// Pokemon
+export interface IPokemon {
+  id: string;
+  name: string;
+}
+
+export interface IPokemonDto {
+  id: number;
+  name: string;
+}
+
+// PokemonDetails
 export interface IPokemonDetailsDto {
   id: string;
   name: string;

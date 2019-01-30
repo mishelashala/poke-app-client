@@ -1,7 +1,7 @@
 import axios from "axios";
-import { IPokemon } from "../modules/PokemonList";
 import pokemonDetailsMapper from "../mappers/PokemonDetailsMapper";
-import { IPokemonDetails } from "../models/";
+import { IPokemonDetails, IPokemon } from "../models/";
+import pokemonMapper from "../mappers/PokemonMapper";
 
 export interface IGetAllPokemonResponse {
   results: IPokemon[];
@@ -11,7 +11,10 @@ export interface IGetAllPokemonResponse {
 const getAll = (): Promise<IGetAllPokemonResponse> => {
   return new Promise(async resolve => {
     const res = await axios.get("https://pokeapi.co/api/v2/pokemon");
-    resolve(res.data);
+    resolve({
+      ...res.data,
+      results: res.data.results.map(pokemonMapper.toEntity)
+    });
   });
 };
 
