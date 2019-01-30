@@ -1,6 +1,6 @@
 import React from "react";
 import pokemonService from "../../services/PokemonService";
-import { IPokemonDetails } from "../../mappers/PokemonDetailsMapper";
+import { IPokemonDetails } from "../../models/";
 import { Text } from "../../ui";
 
 interface IPokemonDetailsViewProps {
@@ -29,7 +29,7 @@ export class PokemonDetailsView extends React.Component<
   };
 
   async componentDidMount() {
-    const data = await pokemonService.getOneByName(
+    const data = await pokemonService.getOneById(
       this.props.match.params.pokemonName
     );
     this.setState({

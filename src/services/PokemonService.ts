@@ -1,14 +1,13 @@
 import axios from "axios";
 import { IPokemon } from "../modules/PokemonList";
-import pokemonDetailsMapper, {
-  IPokemonDetails
-} from "../mappers/PokemonDetailsMapper";
+import pokemonDetailsMapper from "../mappers/PokemonDetailsMapper";
+import { IPokemonDetails } from "../models/";
 
 export interface IGetAllPokemonResponse {
   results: IPokemon[];
 }
 
-// getOneByName :: String -> Promise IGetAllPokemonResponse
+// getOneById :: String -> Promise IGetAllPokemonResponse
 const getAll = (): Promise<IGetAllPokemonResponse> => {
   return new Promise(async resolve => {
     const res = await axios.get("https://pokeapi.co/api/v2/pokemon");
@@ -16,8 +15,8 @@ const getAll = (): Promise<IGetAllPokemonResponse> => {
   });
 };
 
-// getOneByName :: String -> Promise IPokemonDetails
-const getOneByName = (name: string): Promise<IPokemonDetails> => {
+// getOneById :: String -> Promise IPokemonDetails
+const getOneById = (name: string): Promise<IPokemonDetails> => {
   return new Promise(async resolve => {
     const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
     resolve(pokemonDetailsMapper.toEntity(res.data));
@@ -26,5 +25,5 @@ const getOneByName = (name: string): Promise<IPokemonDetails> => {
 
 export default {
   getAll,
-  getOneByName
+  getOneById
 };

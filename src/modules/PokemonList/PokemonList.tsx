@@ -17,7 +17,7 @@ export const PokemonList: React.FunctionComponent<
   return (
     <section style={{ textAlign: "center" }}>
       {props.data.map((pokemon: IPokemon) => (
-        <PokemonItem key={pokemon.name} name={pokemon.name} />
+        <PokemonItem key={pokemon.name} id={pokemon.name} name={pokemon.name} />
       ))}
     </section>
   );
