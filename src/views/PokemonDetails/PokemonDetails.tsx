@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import pokemonService from "../../services/PokemonService";
+import pokemonDetailsService from "../../services/PokemonDetailsService";
 import { IPokemonDetails } from "../../models/";
 import { Text, PokemonCard, PokemonDetails, ViewTitle } from "../../ui";
 
@@ -38,7 +38,7 @@ export class PokemonDetailsView extends React.Component<
   };
 
   async componentDidMount() {
-    const data = await pokemonService.getOneById(
+    const data = await pokemonDetailsService.getOneById(
       this.props.match.params.pokemonName
     );
     this.setState({

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import pokemonService from "../../services/PokemonService";
+import pokemonDetailsService from "../../services/PokemonDetailsService";
 import { Text, PokemonCard, PokemonDetails } from "../../ui";
 
 interface IPokemonItemProps {
@@ -16,7 +16,7 @@ export class PokemonItem extends React.Component<IPokemonItemProps> {
   };
 
   async componentDidMount() {
-    const pokemon = await pokemonService.getOneById(this.props.id);
+    const pokemon = await pokemonDetailsService.getOneById(this.props.id);
     this.setState({
       isLoading: false,
       data: { ...pokemon }
