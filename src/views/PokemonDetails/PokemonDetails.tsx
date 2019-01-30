@@ -1,6 +1,7 @@
 import React from "react";
 import pokemonService from "../../services/PokemonService";
 import { IPokemonDetails } from "../../mappers/PokemonDetailsMapper";
+import { Text } from "../../ui";
 
 interface IPokemonDetailsViewProps {
   match: {
@@ -39,12 +40,12 @@ export class PokemonDetailsView extends React.Component<
   render() {
     return (
       <section>
-        <p>pokemon details</p>
+        <Text>pokemon details</Text>
         <div>
           <img src={this.state.data.picture} />
-          <p>{this.state.data.name}</p>
-          <p>Details</p>
-          <p>Weight: {this.state.data.weight}</p>
+          <Text>{this.state.data.name}</Text>
+          <Text>Details</Text>
+          <Text>Weight: {this.state.data.weight}</Text>
         </div>
       </section>
     );

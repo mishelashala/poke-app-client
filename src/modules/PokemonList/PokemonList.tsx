@@ -1,6 +1,7 @@
 import React from "react";
+import { Text } from "../../ui";
+import { PokemonItem } from "./PokemonItem";
 import { IPokemon } from "./index";
-import { Link } from "react-router-dom";
 
 interface IPokemonListProps {
   data: IPokemon[];
@@ -8,26 +9,16 @@ interface IPokemonListProps {
 
 export const PokemonList: React.FunctionComponent<
   IPokemonListProps
-> = props => (
-  <section style={{ textAlign: "center" }}>
-    {props.data.map((pokemon: IPokemon) => (
-      <Link to={`/pokemon/${pokemon.name}`} key={pokemon.name}>
-        <div
-          style={{
-            boxSizing: "border-box",
-            backgroundColor: "lightgray",
-            color: "#0090B2",
-            display: "inline-block",
-            fontFamily: "arial",
-            margin: "0.25rem",
-            padding: "0.5rem",
-            textAlign: "center",
-            width: "25%"
-          }}
-        >
-          {pokemon.name}
-        </div>
-      </Link>
-    ))}
-  </section>
-);
+> = props => {
+  if (!props.data.length) {
+    return <Text>There are no pokemons to show :'(</Text>;
+  }
+
+  return (
+    <section style={{ textAlign: "center" }}>
+      {props.data.map((pokemon: IPokemon) => (
+        <PokemonItem key={pokemon.name} name={pokemon.name} />
+      ))}
+    </section>
+  );
+};

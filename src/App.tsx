@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { NavBar } from "./modules/NavBar";
 import { HomeView } from "./views/Home";
 import { PokemonDetailsView } from "./views/PokemonDetails";
 
@@ -16,10 +17,16 @@ class App extends React.Component<{}, IAppState> {
   render() {
     return (
       <Router>
-        <Switch>
-          <Route path="/" exact component={HomeView} />
-          <Route path="/pokemon/:pokemonName" component={PokemonDetailsView} />
-        </Switch>
+        <React.Fragment>
+          <NavBar />
+          <Switch>
+            <Route path="/" exact component={HomeView} />
+            <Route
+              path="/pokemon/:pokemonName"
+              component={PokemonDetailsView}
+            />
+          </Switch>
+        </React.Fragment>
       </Router>
     );
   }

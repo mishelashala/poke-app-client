@@ -1,10 +1,22 @@
 import React from "react";
+import styled from "styled-components";
 import { PokemonList, IPokemon } from "../../modules/PokemonList";
 import pokemonService from "../../services/PokemonService";
 
 interface IHomeViewState {
   pokemons: IPokemon[];
 }
+
+const HomeWrapper = styled.main`
+  padding: 1rem;
+  box-sizing: border-box;
+`;
+
+const HomeTitle = styled.h2`
+  font-family: arial;
+  margin: 0 0 0.75rem 0;
+  font-size: 1.2rem;
+`;
 
 export class HomeView extends React.Component<{}, IHomeViewState> {
   state = {
@@ -20,11 +32,10 @@ export class HomeView extends React.Component<{}, IHomeViewState> {
 
   render() {
     return (
-      <React.Fragment>
-        <div>Pokedex</div>
-        <section>pokemon list</section>
+      <HomeWrapper>
+        <HomeTitle>Pokemon List</HomeTitle>
         <PokemonList data={this.state.pokemons} />
-      </React.Fragment>
+      </HomeWrapper>
     );
   }
 }
