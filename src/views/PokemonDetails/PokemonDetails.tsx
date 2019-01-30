@@ -2,17 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import pokemonService from "../../services/PokemonService";
 import { IPokemonDetails } from "../../models/";
-import { Text, PokemonCard, PokemonDetails } from "../../ui";
+import { Text, PokemonCard, PokemonDetails, ViewTitle } from "../../ui";
 
 const PokemonDetailsWrapper = styled.section`
   box-sizing: border-box;
   padding: 1rem;
-`;
-
-const PokemonDetailsTitle = styled.h2`
-  font-family: arial;
-  margin: 0 0 0.75rem 0;
-  font-size: 1.2rem;
 `;
 
 interface IPokemonDetailsViewProps {
@@ -38,6 +32,7 @@ export class PokemonDetailsView extends React.Component<
       id: "",
       name: "",
       picture: "",
+      types: [],
       weight: 0
     }
   };
@@ -55,7 +50,7 @@ export class PokemonDetailsView extends React.Component<
   render() {
     return (
       <PokemonDetailsWrapper>
-        <PokemonDetailsTitle>Pokemon Details</PokemonDetailsTitle>
+        <ViewTitle>Pokemon Details</ViewTitle>
         <div style={{ boxSizing: "border-box", textAlign: "center" }}>
           <PokemonCard>
             <img src={this.state.data.picture} />

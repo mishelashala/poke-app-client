@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { IPokemon } from "../../models";
 import { PokemonList } from "../../modules/PokemonList";
 import pokemonService from "../../services/PokemonService";
+import { ViewTitle } from "../../ui/";
 
 interface IHomeViewState {
   isLoading: boolean;
@@ -12,12 +13,6 @@ interface IHomeViewState {
 const HomeWrapper = styled.main`
   padding: 1rem;
   box-sizing: border-box;
-`;
-
-const HomeTitle = styled.h2`
-  font-family: arial;
-  margin: 0 0 0.75rem 0;
-  font-size: 1.2rem;
 `;
 
 export class HomeView extends React.Component<{}, IHomeViewState> {
@@ -37,7 +32,7 @@ export class HomeView extends React.Component<{}, IHomeViewState> {
   render() {
     return (
       <HomeWrapper>
-        <HomeTitle>Pokemon List</HomeTitle>
+        <ViewTitle>Pokemon List</ViewTitle>
         <PokemonList data={this.state.pokemons} />
       </HomeWrapper>
     );
