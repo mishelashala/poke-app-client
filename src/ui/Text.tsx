@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { TEXT_COLOR } from "./colors";
 
 export const Text = styled.p`
-  color: #3c3c3c;
+  color: ${TEXT_COLOR};
   font-family: arial;
   margin: 0;
 `;

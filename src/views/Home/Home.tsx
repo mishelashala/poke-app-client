@@ -5,6 +5,7 @@ import { PokemonList } from "../../modules/PokemonList";
 import pokemonService from "../../services/PokemonService";
 
 interface IHomeViewState {
+  isLoading: boolean;
   pokemons: IPokemon[];
 }
 
@@ -21,12 +22,14 @@ const HomeTitle = styled.h2`
 
 export class HomeView extends React.Component<{}, IHomeViewState> {
   state = {
+    isLoading: true,
     pokemons: []
   };
 
   async componentDidMount() {
     const data = await pokemonService.getAll();
     this.setState({
+      isLoading: true,
       pokemons: data.results
     });
   }
