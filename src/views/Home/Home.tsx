@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { IPokemon } from "../../models";
 import { PokemonList } from "../../modules/PokemonList";
 import { IPokemonService } from "../../services/PokemonService";
-import { ViewTitle } from "../../ui/";
+import { ViewTitle, LoadingCard, LoadingTitle } from "../../ui/";
 
 interface IHomeViewState {
   isLoading: boolean;
@@ -25,12 +25,22 @@ export const HomeView = (pokemonService: IPokemonService) =>
     async componentDidMount() {
       const data = await pokemonService.getAll();
       this.setState({
-        isLoading: true,
+        isLoading: false,
         pokemons: data.results
       });
     }
 
     render() {
+      if (this.state.isLoading) {
+        return (
+          <HomeWrapper>
+            <LoadingTitle />
+            <LoadingCard />
+            <LoadingCard />
+          </HomeWrapper>
+        );
+      }
+
       return (
         <HomeWrapper>
           <ViewTitle>Pokemon List</ViewTitle>

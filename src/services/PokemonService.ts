@@ -12,12 +12,14 @@ export interface IPokemonService {
 export const PokemonService = (gateway: any): IPokemonService => {
   // getAll :: String -> Promise IGetAllPokemonResponse
   const getAll = (): Promise<IGetAllPokemonResponse> => {
-    return new Promise(async resolve => {
-      const res = await gateway.getPokemons();
-      resolve({
-        ...res.data,
-        results: res.data.results.map(pokemonMapper.toEntity)
-      });
+    return new Promise(resolve => {
+      setTimeout(async () => {
+        const res = await gateway.getPokemons();
+        resolve({
+          ...res.data,
+          results: res.data.results.map(pokemonMapper.toEntity)
+        });
+      }, 1500);
     });
   };
 
