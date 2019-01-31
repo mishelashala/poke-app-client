@@ -3,6 +3,7 @@ import styled from "styled-components";
 import pokemonDetailsService from "../../services/PokemonDetailsService";
 import { IPokemonDetails } from "../../models/";
 import { Text, PokemonCard, PokemonDetails, ViewTitle } from "../../ui";
+import { TypeList } from "../../modules/TypeList";
 
 const PokemonDetailsWrapper = styled.section`
   box-sizing: border-box;
@@ -58,6 +59,8 @@ export class PokemonDetailsView extends React.Component<
               <Text>{this.state.data.name}</Text>
             </PokemonDetails>
           </PokemonCard>
+
+          <TypeList data={this.state.data.types} />
 
           <div>
             <Text>Details</Text>
