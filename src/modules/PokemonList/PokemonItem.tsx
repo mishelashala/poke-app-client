@@ -7,9 +7,14 @@ import {
   IPokemonDetailsService
 } from "../../services/PokemonDetailsService";
 import { Text, PokemonCard, PokemonDetails, LoadingImage } from "../../ui";
+import { TypeList } from "../TypeList";
 
 const PokemonItemImage = styled.img`
   margin: 0.5rem auto;
+`;
+
+const PokemonTypes = styled.div`
+  margin: 0.75rem 0 0.25rem 0;
 `;
 
 interface IPokemonItemProps {
@@ -21,6 +26,7 @@ interface IPokemonItemState {
   isLoading: boolean;
   data: {
     picture: string;
+    types: string[];
   };
 }
 
@@ -31,7 +37,8 @@ export class PokemonItem extends React.Component<
   state = {
     isLoading: true,
     data: {
-      picture: ""
+      picture: "",
+      types: []
     }
   };
 
@@ -57,6 +64,9 @@ export class PokemonItem extends React.Component<
           )}
           <PokemonDetails>
             <Text>{this.props.name}</Text>
+            <PokemonTypes>
+              <TypeList data={this.state.data.types} />
+            </PokemonTypes>
           </PokemonDetails>
         </PokemonCard>
       </Link>

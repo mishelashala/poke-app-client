@@ -33,17 +33,7 @@ export const TypeLabel = styled(Text)<ITypeLabelProps>`
   margin-right: 0.5rem;
 `;
 
-export const TypeListWrapper = styled.div`
-  margin-bottom: 1rem;
-`;
-
 export const TypeListContent = styled.div`
-  text-align: left;
-`;
-
-const SectionTitle = styled(Text)`
-  font-weight: bold;
-  margin-bottom: 0.5rem;
   text-align: left;
 `;
 
@@ -52,14 +42,11 @@ export interface ITypeListProps {
 }
 
 export const TypeList: React.FunctionComponent<ITypeListProps> = ({ data }) => (
-  <TypeListWrapper>
-    <SectionTitle>Type</SectionTitle>
-    <TypeListContent>
-      {data.map(type => (
-        <TypeLabel key={type} type={type}>
-          {type}
-        </TypeLabel>
-      ))}
-    </TypeListContent>
-  </TypeListWrapper>
+  <div>
+    {data.map(type => (
+      <TypeLabel key={type} type={type}>
+        {type}
+      </TypeLabel>
+    ))}
+  </div>
 );
