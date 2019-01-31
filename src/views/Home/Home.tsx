@@ -1,13 +1,26 @@
 import React from "react";
 import styled from "styled-components";
+import { lowerCase } from "lodash/fp";
 import { IPokemon } from "../../models";
 import { PokemonList } from "../../modules/PokemonList";
 import { IPokemonService } from "../../services/PokemonService";
-import { ViewTitle, LoadingCard, LoadingTitle } from "../../ui/";
+import { ViewTitle, LoadingCard, LoadingTitle, SearchBar } from "../../ui/";
+
+// filterSearchResults :: (String, IPokemon[]) -> IPokemon[]
+const filterSearchResults = (name = "", pokemons: IPokemon[]) => {
+  if (!name) {
+    return pokemons;
+  }
+
+  return pokemons.filter((pokemon: IPokemon) =>
+    lowerCase(pokemon.name).includes(lowerCase(name))
+  );
+};
 
 interface IHomeViewState {
   isLoading: boolean;
   pokemons: IPokemon[];
+  search: string;
 }
 
 const HomeWrapper = styled.main`
@@ -19,6 +32,7 @@ export const HomeView = (pokemonService: IPokemonService) =>
   class extends React.Component<{}, IHomeViewState> {
     state = {
       isLoading: true,
+      search: "",
       pokemons: []
     };
 
@@ -30,11 +44,16 @@ export const HomeView = (pokemonService: IPokemonService) =>
       });
     }
 
+    handleSearchChange = ({ target: { value } }: any) => {
+      this.setState({ search: value });
+    };
+
     render() {
       if (this.state.isLoading) {
         return (
           <HomeWrapper>
             <LoadingTitle />
+            <LoadingCard />
             <LoadingCard />
             <LoadingCard />
           </HomeWrapper>
@@ -44,7 +63,15 @@ export const HomeView = (pokemonService: IPokemonService) =>
       return (
         <HomeWrapper>
           <ViewTitle>Pokemon List</ViewTitle>
-          <PokemonList data={this.state.pokemons} />
+          <SearchBar
+            placeholder="Search pokemon by name"
+            type="search"
+            value={this.state.search}
+            onChange={this.handleSearchChange}
+          />
+          <PokemonList
+            data={filterSearchResults(this.state.search, this.state.pokemons)}
+          />
         </HomeWrapper>
       );
     }
