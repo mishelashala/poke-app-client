@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import pokemonDetailsService from "../../services/PokemonDetailsService";
+import { IPokemonDetailsService } from "../../services/PokemonDetailsService";
 import { IPokemonDetails } from "../../models/";
 import { Text, PokemonCard, PokemonDetails, ViewTitle } from "../../ui";
 import { TypeList } from "../../modules/TypeList";
@@ -23,51 +23,55 @@ interface IPokemonDetailsViewState {
   data: IPokemonDetails;
 }
 
-export class PokemonDetailsView extends React.Component<
-  IPokemonDetailsViewProps,
-  IPokemonDetailsViewState
-> {
-  state = {
-    isLoading: true,
-    data: {
-      id: "",
-      name: "",
-      picture: "",
-      types: [],
-      weight: 0
+export const PokemonDetailsView = (
+  pokemonDetailsService: IPokemonDetailsService
+) => {
+  return class extends React.Component<
+    IPokemonDetailsViewProps,
+    IPokemonDetailsViewState
+  > {
+    state = {
+      isLoading: true,
+      data: {
+        id: "",
+        name: "",
+        picture: "",
+        types: [],
+        weight: 0
+      }
+    };
+
+    async componentDidMount() {
+      const data = await pokemonDetailsService.getOneById(
+        this.props.match.params.pokemonName
+      );
+      this.setState({
+        isLoading: false,
+        data
+      });
+    }
+
+    render() {
+      return (
+        <PokemonDetailsWrapper>
+          <ViewTitle>Pokemon Details</ViewTitle>
+          <div style={{ boxSizing: "border-box", textAlign: "center" }}>
+            <PokemonCard>
+              <img src={this.state.data.picture} />
+              <PokemonDetails>
+                <Text>{this.state.data.name}</Text>
+              </PokemonDetails>
+            </PokemonCard>
+
+            <TypeList data={this.state.data.types} />
+
+            <div>
+              <Text>Details</Text>
+              <Text>Weight: {this.state.data.weight}</Text>
+            </div>
+          </div>
+        </PokemonDetailsWrapper>
+      );
     }
   };
-
-  async componentDidMount() {
-    const data = await pokemonDetailsService.getOneById(
-      this.props.match.params.pokemonName
-    );
-    this.setState({
-      isLoading: false,
-      data
-    });
-  }
-
-  render() {
-    return (
-      <PokemonDetailsWrapper>
-        <ViewTitle>Pokemon Details</ViewTitle>
-        <div style={{ boxSizing: "border-box", textAlign: "center" }}>
-          <PokemonCard>
-            <img src={this.state.data.picture} />
-            <PokemonDetails>
-              <Text>{this.state.data.name}</Text>
-            </PokemonDetails>
-          </PokemonCard>
-
-          <TypeList data={this.state.data.types} />
-
-          <div>
-            <Text>Details</Text>
-            <Text>Weight: {this.state.data.weight}</Text>
-          </div>
-        </div>
-      </PokemonDetailsWrapper>
-    );
-  }
-}
+};

@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import pokemonDetailsService from "../../services/PokemonDetailsService";
+import apiGateway from "../../api-gateways/LocalApiGateway";
+import {
+  PokemonDetailsService,
+  IPokemonDetailsService
+} from "../../services/PokemonDetailsService";
 import { Text, PokemonCard, PokemonDetails } from "../../ui";
 
 interface IPokemonItemProps {
@@ -15,8 +19,12 @@ export class PokemonItem extends React.Component<IPokemonItemProps> {
     }
   };
 
+  pokemonDetailsService: IPokemonDetailsService = PokemonDetailsService(
+    apiGateway
+  );
+
   async componentDidMount() {
-    const pokemon = await pokemonDetailsService.getOneById(this.props.id);
+    const pokemon = await this.pokemonDetailsService.getOneById(this.props.id);
     this.setState({
       isLoading: false,
       data: { ...pokemon }
