@@ -1,6 +1,4 @@
 import React from "react";
-// import { lowerCase } from "lodash/fp";
-import { IPokemon } from "../../models";
 import { PokemonList } from "../../modules/PokemonList";
 import { FilterByType } from "../../modules/FilterByType";
 import {
@@ -18,14 +16,12 @@ interface IHomeViewProps {
 }
 
 interface IHomeViewState {
-  pokemons: IPokemon[];
   search: string;
 }
 
 export class HomeView extends React.Component<IHomeViewProps, IHomeViewState> {
   state = {
-    search: "",
-    pokemons: []
+    search: ""
   };
 
   async componentDidMount() {
