@@ -42,12 +42,14 @@ export interface IPokemonState {
   isLoading: boolean;
   error?: Error;
   data: any;
+  isCached: boolean;
 }
 
 const initialState = {
   data: {},
   error: undefined,
-  isLoading: true
+  isLoading: true,
+  isCached: false
 };
 
 // pokemonReducer :: (IPokemonState, IReduxAction) => IPokemonState
@@ -56,11 +58,11 @@ const pokemonReducer = createReducer<IPokemonState>(initialState, {
     return { ...state, isLoading: true };
   },
   [FETCH_ALL_POKEMONS_SUCCEED]: (state: any, action: any) => {
-    console.log("ACTION:", action);
     return {
       ...state,
       isLoading: false,
-      data: action.payload.pokemons
+      data: action.payload.pokemons,
+      isCached: true
     };
   },
   [FETCH_ALL_POKEMONS_FAILED]: (state, action) => {

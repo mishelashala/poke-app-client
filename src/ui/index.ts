@@ -10,3 +10,4 @@ export { SearchBar } from "./SearchBar";
 export { SectionTitle } from "./SectionTitle";
 export { Text } from "./Text";
 export { ViewTitle } from "./ViewTitle";
+export { Wrapper } from "./Wrapper";
