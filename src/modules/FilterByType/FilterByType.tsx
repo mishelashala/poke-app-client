@@ -1,6 +1,7 @@
 import React from "react";
 import Select from "react-select";
-import { configureStyles, IFilterByTypeOption } from "./configureStyles";
+import { configureStyles } from "./configureStyles";
+import { IFilterByTypeOption } from "./index";
 
 const options: IFilterByTypeOption[] = [
   { value: "fire", label: "Fire" },
@@ -8,8 +9,14 @@ const options: IFilterByTypeOption[] = [
   { value: "water", label: "Water" }
 ];
 
+interface IFilterByTypeProps {
+  handleChange: (a: any) => void;
+}
+
 // FilterByType :: () -> React.FunctionComponent
-export const FilterByType = () => (
+export const FilterByType: React.FunctionComponent<
+  IFilterByTypeProps
+> = props => (
   <Select
     isMulti
     name="types"
@@ -18,5 +25,6 @@ export const FilterByType = () => (
     classNamePrefix="select"
     placeholder="Filter by Pokemon Type"
     styles={configureStyles()}
+    onChange={props.handleChange}
   />
 );

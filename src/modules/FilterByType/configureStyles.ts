@@ -1,12 +1,8 @@
 import { colors } from "../../ui/";
+import { IFilterByTypeOption } from "./index";
 
 export interface IFilterByTypeConfig {
   data: IFilterByTypeOption;
-}
-
-export interface IFilterByTypeOption {
-  value: string;
-  label: string;
 }
 
 // getTypeLabelBackgroundColor :: String -> String
@@ -26,19 +22,19 @@ const getTypeLabelBackgroundColor = (type: string = ""): string => {
 };
 
 export const configureStyles = () => ({
-  container: (styles: any) => {
+  container: (styles: React.CSSProperties) => {
     return {
       ...styles,
       marginBottom: "0.75rem"
     };
   },
-  control: (styles: any) => {
+  control: (styles: React.CSSProperties) => {
     return { ...styles, fontFamily: "arial" };
   },
-  option: (styles: any) => {
+  option: (styles: React.CSSProperties) => {
     return { ...styles, fontFamily: "arial" };
   },
-  multiValue: (styles: any, config: IFilterByTypeConfig) => {
+  multiValue: (styles: React.CSSProperties, config: IFilterByTypeConfig) => {
     return {
       ...styles,
       backgroundColor: getTypeLabelBackgroundColor(config.data.value),
@@ -46,7 +42,7 @@ export const configureStyles = () => ({
       fontFamily: "arial"
     };
   },
-  multiValueLabel: (styles: any) => {
+  multiValueLabel: (styles: React.CSSProperties) => {
     return {
       ...styles,
       color: "white",

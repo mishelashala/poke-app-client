@@ -11,6 +11,8 @@ export const FETCH_ALL_POKEMONS_FAILED =
 
 export const SEARCH_CHANGED = "pokedex/POKEMONS/SEARCH_CHANGED";
 
+export const FILTER_BY_TYPE_CHANGED = "pokedex/POKEMONS/FILTER_BY_TYPE_CHANGED";
+
 // ACTION CREATORS
 
 // fetchAllStarted :: () -> IFluxStandardAction
@@ -49,6 +51,14 @@ export const searchChanged = (search = "") => {
   };
 };
 
+// filterByTypeChanged :: String[] -> IFluxStandardAction
+export const filterByTypeChanged = (types: string[]) => ({
+  type: FILTER_BY_TYPE_CHANGED,
+  payload: {
+    types
+  }
+});
+
 // REDUCER
 export interface IPokemonState {
   isLoading: boolean;
@@ -56,6 +66,7 @@ export interface IPokemonState {
   data: any;
   isCached: boolean;
   search: string;
+  filterByType: string[];
 }
 
 export const initialState = (): IPokemonState => ({
@@ -63,7 +74,8 @@ export const initialState = (): IPokemonState => ({
   error: undefined,
   isLoading: true,
   isCached: false,
-  search: ""
+  search: "",
+  filterByType: []
 });
 
 // pokemonReducer :: (IPokemonState, IReduxAction) => IPokemonState
@@ -90,6 +102,12 @@ const pokemonReducer = createReducer<IPokemonState>(initialState(), {
     return {
       ...state,
       search: action.payload.search
+    };
+  },
+  [FILTER_BY_TYPE_CHANGED]: (state, action) => {
+    return {
+      ...state,
+      filterByType: action.payload.types
     };
   }
 });

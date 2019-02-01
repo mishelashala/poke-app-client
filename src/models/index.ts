@@ -2,11 +2,13 @@
 export interface IPokemon {
   id: string;
   name: string;
+  type: string[];
 }
 
 export interface IPokemonDto {
   id: number;
   name: string;
+  type: string[];
 }
 
 // Pokemon Types
