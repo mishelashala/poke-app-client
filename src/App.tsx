@@ -6,7 +6,7 @@ import apiGateway from "./api-gateways/HttpApiGateway";
 import { PokemonDetailsService } from "./services/PokemonDetailsService";
 import { HomeView } from "./views/Home";
 import { PokemonDetailsView } from "./views/PokemonDetails";
-import { store } from "./configureStore";
+import { configureStore } from "./configureStore";
 
 interface IPokemon {
   name: string;
@@ -24,7 +24,7 @@ const withLocalPokemonDetailsService = (factory: Function) => {
 class App extends React.Component<{}, IAppState> {
   render() {
     return (
-      <Provider store={store}>
+      <Provider store={configureStore()}>
         <Router>
           <React.Fragment>
             <NavBar />

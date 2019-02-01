@@ -13,6 +13,13 @@ export const SEARCH_CHANGED = "pokedex/POKEMONS/SEARCH_CHANGED";
 
 export const FILTER_BY_TYPE_CHANGED = "pokedex/POKEMONS/FILTER_BY_TYPE_CHANGED";
 
+export const FETCH_POKEMON_DETAILS_BY_NAME_START =
+  "pokedex/POKEMONS/FETCH_POKEMON_DETAILS_BY_NAME_START";
+export const FETCH_POKEMON_DETAILS_BY_NAME_SUCCESS =
+  "pokedex/POKEMONS/FETCH_POKEMON_DETAILS_BY_NAME_SUCCESS";
+export const FETCH_POKEMON_DETAILS_BY_NAME_FAIL =
+  "pokedex/POKEMONS/FETCH_POKEMON_DETAILS_BY_NAME_FAIL";
+
 // ACTION CREATORS
 
 // fetchAllStarted :: () -> IFluxStandardAction
@@ -40,6 +47,26 @@ export const fetchAllSucceed = (pokemons: IPokemon[]) => {
     }
   };
 };
+
+// fetchDetailsByNameStarted :: String -> IFluxStandardAction
+export const fetchDetailsByNameStarted = (name: string) => ({
+  type: FETCH_POKEMON_DETAILS_BY_NAME_START,
+  payload: {
+    name
+  }
+});
+
+// fetchDetailsByNameSucceed :: IPokemonDetails -> IFluxStandardAction
+export const fetchDetailsByNameSucceed = () => ({
+  type: FETCH_POKEMON_DETAILS_BY_NAME_SUCCESS
+});
+
+// fetchDetailsByNameFailed :: Error -> IFluxStandardAction
+export const fetchDetailsByNameFailed = (error: Error) => ({
+  type: FETCH_POKEMON_DETAILS_BY_NAME_FAIL,
+  payload: error,
+  error: true
+});
 
 // searchChanged :: String -> IFluxStandardAction
 export const searchChanged = (search = "") => {
@@ -108,6 +135,53 @@ const pokemonReducer = createReducer<IPokemonState>(initialState(), {
     return {
       ...state,
       filterByType: action.payload.types
+    };
+  },
+  [FETCH_POKEMON_DETAILS_BY_NAME_START]: (state: any, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        [action.payload.name]: {
+          ...state.data[action.payload.name],
+          _meta: {
+            isLoading: true
+          }
+        }
+      }
+    };
+  },
+  [FETCH_POKEMON_DETAILS_BY_NAME_SUCCESS]: (state: any, action) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        [action.payload.name]: {
+          ...state.data[action.payload.name],
+          picture: action.payload.data.picture,
+          type: action.payload.data.types,
+          _meta: {
+            isLoading: false,
+            isCached: true
+          }
+        }
+      }
+    };
+  },
+  [FETCH_POKEMON_DETAILS_BY_NAME_FAIL]: (state: any, action: any) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        [action.name]: {
+          ...state.data[action.name],
+
+          _meta: {
+            isLoading: false,
+            error: action.payload
+          }
+        }
+      }
     };
   }
 });

@@ -3,6 +3,11 @@ export interface IPokemon {
   id: string;
   name: string;
   type: string[];
+  picture: string;
+  _meta: {
+    isLoading: boolean;
+    isCached: boolean;
+  };
 }
 
 export interface IPokemonDto {

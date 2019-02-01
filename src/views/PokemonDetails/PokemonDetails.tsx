@@ -42,7 +42,7 @@ export const PokemonDetailsView = (
     };
 
     async componentDidMount() {
-      const data = await pokemonDetailsService.getOneById(
+      const data = await pokemonDetailsService.getDetailsByName(
         this.props.match.params.pokemonName
       );
       this.setState({
