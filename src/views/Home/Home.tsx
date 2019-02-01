@@ -13,26 +13,16 @@ interface IHomeViewProps {
   isCached: boolean;
   isLoading: boolean;
   fetchPokemons: () => any;
-}
-
-interface IHomeViewState {
   search: string;
+  handleSearchChange: (e: any) => void;
 }
 
-export class HomeView extends React.Component<IHomeViewProps, IHomeViewState> {
-  state = {
-    search: ""
-  };
-
+export class HomeView extends React.Component<IHomeViewProps> {
   async componentDidMount() {
     if (!this.props.isCached) {
       this.props.fetchPokemons();
     }
   }
-
-  handleSearchChange = ({ target: { value } }: any) => {
-    this.setState({ search: value });
-  };
 
   render() {
     if (this.props.isLoading) {
@@ -52,8 +42,8 @@ export class HomeView extends React.Component<IHomeViewProps, IHomeViewState> {
         <SearchBar
           placeholder="Search pokemon by name"
           type="search"
-          value={this.state.search}
-          onChange={this.handleSearchChange}
+          value={this.props.search}
+          onChange={this.props.handleSearchChange}
         />
 
         <FilterByType />

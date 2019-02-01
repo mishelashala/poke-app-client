@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import apiGateway from "../../api-gateways/LocalApiGateway";
+import apiGateway from "../../api-gateways/HttpApiGateway";
 import {
   PokemonDetailsService,
   IPokemonDetailsService

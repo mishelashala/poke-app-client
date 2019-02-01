@@ -1,10 +1,11 @@
 import { connect } from "react-redux";
 import { PokemonList } from "./PokemonList";
+import { getPokemons } from "./selector";
 
 const mapStateToProps = (state: any) => {
   return {
     isLoading: state.pokemons.isLoading,
-    data: state.pokemons.data
+    data: getPokemons(state)
   };
 };
 

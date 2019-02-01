@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import { NavBar } from "./modules/NavBar";
-import apiGateway from "./api-gateways/LocalApiGateway";
+import apiGateway from "./api-gateways/HttpApiGateway";
 import { PokemonDetailsService } from "./services/PokemonDetailsService";
 import { HomeView } from "./views/Home";
 import { PokemonDetailsView } from "./views/PokemonDetails";

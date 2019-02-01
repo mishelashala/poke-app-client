@@ -9,6 +9,8 @@ export const FETCH_ALL_POKEMONS_SUCCEED =
 export const FETCH_ALL_POKEMONS_FAILED =
   "pokedex/POKEMONS/FETCH_ALL_POKEMONS_FAILED";
 
+export const SEARCH_CHANGED = "pokedex/POKEMONS/SEARCH_CHANGED";
+
 // ACTION CREATORS
 
 // fetchAllStarted :: () -> IFluxStandardAction
@@ -37,23 +39,35 @@ export const fetchAllSucceed = (pokemons: IPokemon[]) => {
   };
 };
 
+// searchChanged :: String -> IFluxStandardAction
+export const searchChanged = (search = "") => {
+  return {
+    type: SEARCH_CHANGED,
+    payload: {
+      search
+    }
+  };
+};
+
 // REDUCER
 export interface IPokemonState {
   isLoading: boolean;
   error?: Error;
   data: any;
   isCached: boolean;
+  search: string;
 }
 
-const initialState = {
+export const initialState = (): IPokemonState => ({
   data: {},
   error: undefined,
   isLoading: true,
-  isCached: false
-};
+  isCached: false,
+  search: ""
+});
 
 // pokemonReducer :: (IPokemonState, IReduxAction) => IPokemonState
-const pokemonReducer = createReducer<IPokemonState>(initialState, {
+const pokemonReducer = createReducer<IPokemonState>(initialState(), {
   [FETCH_ALL_POKEMONS_STARTED]: state => {
     return { ...state, isLoading: true };
   },
@@ -70,6 +84,12 @@ const pokemonReducer = createReducer<IPokemonState>(initialState, {
       ...state,
       isLoading: false,
       error: action.payload
+    };
+  },
+  [SEARCH_CHANGED]: (state, action) => {
+    return {
+      ...state,
+      search: action.payload.search
     };
   }
 });
