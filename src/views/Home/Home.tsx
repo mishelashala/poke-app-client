@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { lowerCase } from "lodash/fp";
 import { IPokemon } from "../../models";
 import { PokemonList } from "../../modules/PokemonList";
-import { IPokemonService } from "../../services/PokemonService";
 import {
   ViewTitle,
   LoadingCard,
@@ -40,8 +39,12 @@ const filterSearchResults = (name = "", pokemons: IPokemon[]) => {
   );
 };
 
-interface IHomeViewState {
+interface IHomeViewProps {
   isLoading: boolean;
+  fetchPokemons: () => any;
+}
+
+interface IHomeViewState {
   pokemons: IPokemon[];
   search: string;
 }
@@ -57,90 +60,82 @@ const options = [
   { value: "water", label: "Water" }
 ];
 
-export const HomeView = (pokemonService: IPokemonService) =>
-  class extends React.Component<{}, IHomeViewState> {
-    state = {
-      isLoading: true,
-      search: "",
-      pokemons: []
-    };
+export class HomeView extends React.Component<IHomeViewProps, IHomeViewState> {
+  state = {
+    search: "",
+    pokemons: []
+  };
 
-    async componentDidMount() {
-      const data = await pokemonService.getAll();
-      this.setState({
-        isLoading: false,
-        pokemons: data.results
-      });
-    }
+  async componentDidMount() {
+    this.props.fetchPokemons();
+  }
 
-    handleSearchChange = ({ target: { value } }: any) => {
-      this.setState({ search: value });
-    };
+  handleSearchChange = ({ target: { value } }: any) => {
+    this.setState({ search: value });
+  };
 
-    render() {
-      if (this.state.isLoading) {
-        return (
-          <HomeWrapper>
-            <LoadingTitle />
-            <LoadingCard />
-            <LoadingCard />
-            <LoadingCard />
-          </HomeWrapper>
-        );
-      }
-
+  render() {
+    if (this.props.isLoading) {
       return (
         <HomeWrapper>
-          <ViewTitle>Pokemon List</ViewTitle>
-          <SearchBar
-            placeholder="Search pokemon by name"
-            type="search"
-            value={this.state.search}
-            onChange={this.handleSearchChange}
-          />
-
-          <Select
-            isMulti
-            name="types"
-            options={options}
-            className="basic-multi-select"
-            classNamePrefix="select"
-            placeholder="Pokemon Type"
-            styles={{
-              container: styles => {
-                return {
-                  ...styles,
-                  marginBottom: "0.75rem"
-                };
-              },
-              control: styles => {
-                return { ...styles, fontFamily: "arial" };
-              },
-              option: styles => {
-                return { ...styles, fontFamily: "arial" };
-              },
-              multiValue: (styles, { data }) => {
-                return {
-                  ...styles,
-                  backgroundColor: getTypeLabelBackgroundColor(data.value),
-                  color: "white",
-                  fontFamily: "arial"
-                };
-              },
-              multiValueLabel: styles => {
-                return {
-                  ...styles,
-                  color: "white",
-                  fontFamily: "arial"
-                };
-              }
-            }}
-          />
-
-          <PokemonList
-            data={filterSearchResults(this.state.search, this.state.pokemons)}
-          />
+          <LoadingTitle />
+          <LoadingCard />
+          <LoadingCard />
+          <LoadingCard />
         </HomeWrapper>
       );
     }
-  };
+
+    return (
+      <HomeWrapper>
+        <ViewTitle>Pokemon List</ViewTitle>
+        <SearchBar
+          placeholder="Search pokemon by name"
+          type="search"
+          value={this.state.search}
+          onChange={this.handleSearchChange}
+        />
+
+        <Select
+          isMulti
+          name="types"
+          options={options}
+          className="basic-multi-select"
+          classNamePrefix="select"
+          placeholder="Pokemon Type"
+          styles={{
+            container: styles => {
+              return {
+                ...styles,
+                marginBottom: "0.75rem"
+              };
+            },
+            control: styles => {
+              return { ...styles, fontFamily: "arial" };
+            },
+            option: styles => {
+              return { ...styles, fontFamily: "arial" };
+            },
+            multiValue: (styles, { data }) => {
+              return {
+                ...styles,
+                backgroundColor: getTypeLabelBackgroundColor(data.value),
+                color: "white",
+                fontFamily: "arial"
+              };
+            },
+            multiValueLabel: styles => {
+              return {
+                ...styles,
+                color: "white",
+                fontFamily: "arial"
+              };
+            }
+          }}
+        />
+
+        <PokemonList />
+      </HomeWrapper>
+    );
+  }
+}
