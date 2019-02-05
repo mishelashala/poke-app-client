@@ -5,6 +5,9 @@ import { Text, PokemonCard, PokemonDetails, LoadingImage } from "../../../ui";
 import { TypeList } from "../../TypeList";
 
 const PokemonItemImage = styled.img`
+  border-radius: 50%;
+  box-sizing: border-box;
+  height: 96px;
   margin: 0.5rem auto;
 `;
 
