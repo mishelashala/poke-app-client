@@ -11,7 +11,7 @@ export const PokemonCard = styled.div`
   font-family: arial;
   margin: 0 0 1rem 0;
   padding: 0;
-  textalign: center;
+  text-align: center;
   width: 100%;
 
   ::last-child {

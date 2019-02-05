@@ -10,6 +10,26 @@ const PokemonDetailsWrapper = styled.section`
   padding: 1rem;
 `;
 
+const DetailsViewTitle = styled(ViewTitle)`
+  margin-bottom: 0.25rem;
+  text-align: left;
+`;
+
+const TypeListWrapper = styled.div`
+  margin-bottom: 1.25rem;
+  text-align: left;
+`;
+
+const AbilityLabel = styled(Text)`
+  background-color: #f2f2f2;
+  border-radius: 1rem;
+  color: black;
+  display: inline-block;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+`;
+
 interface IPokemonDetailsViewProps {
   match: {
     params: {
@@ -33,7 +53,9 @@ export const PokemonDetailsView = (
     state = {
       isLoading: true,
       data: {
+        abilities: [],
         id: "",
+        moves: [],
         name: "",
         picture: "",
         types: [],
@@ -43,8 +65,9 @@ export const PokemonDetailsView = (
 
     async componentDidMount() {
       const data = await pokemonDetailsService.getDetailsByName(
-        this.props.match.params.pokemonName
+        this.props.match.params.pokemonName.toLowerCase()
       );
+
       this.setState({
         isLoading: false,
         data
@@ -63,7 +86,24 @@ export const PokemonDetailsView = (
               </PokemonDetails>
             </PokemonCard>
 
-            <TypeList data={this.state.data.types} />
+            <DetailsViewTitle>Type</DetailsViewTitle>
+            <TypeListWrapper>
+              <TypeList data={this.state.data.types} />
+            </TypeListWrapper>
+
+            <DetailsViewTitle>Abilities</DetailsViewTitle>
+            <div style={{ marginBottom: "1.5rem", textAlign: "left" }}>
+              {this.state.data.abilities.map((ability: string) => {
+                return <AbilityLabel key={ability}>{ability}</AbilityLabel>;
+              })}
+            </div>
+
+            <DetailsViewTitle>Moves</DetailsViewTitle>
+            <div style={{ marginBottom: "1.5rem", textAlign: "left" }}>
+              {this.state.data.moves.map((move: string) => {
+                return <AbilityLabel key={move}>{move}</AbilityLabel>;
+              })}
+            </div>
 
             <div>
               <Text>Details</Text>

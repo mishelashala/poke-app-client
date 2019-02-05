@@ -24,9 +24,17 @@ export interface IPokemonTypeDto {
   };
 }
 
+export interface IPokemonMoveDto {
+  move: {
+    name: string;
+  };
+}
+
 // Pokemon Details
 export interface IPokemonDetailsDto {
+  abilities: IAbilityDto[];
   id: string;
+  moves: IPokemonMoveDto[];
   name: string;
   sprites: {
     front_default: string;
@@ -36,9 +44,19 @@ export interface IPokemonDetailsDto {
 }
 
 export interface IPokemonDetails {
+  abilities: string[];
   id: string;
+  moves: string[];
   name: string;
   picture: string;
   types: string[];
   weight: number;
+}
+
+// Abilities
+export interface IAbilityDto {
+  ability: {
+    name: string;
+    url: string;
+  };
 }
