@@ -30,6 +30,14 @@ const AbilityLabel = styled(Text)`
   padding: 0.25rem 0.5rem;
 `;
 
+const DetailsText = styled(Text)`
+  margin-top: 0.2rem;
+`;
+
+const Name = styled(Text)`
+  margin-bottom: 0.5rem;
+`;
+
 interface IPokemonDetailsViewProps {
   match: {
     params: {
@@ -54,6 +62,7 @@ export const PokemonDetailsView = (
       isLoading: true,
       data: {
         abilities: [],
+        height: 0,
         id: "",
         moves: [],
         name: "",
@@ -82,7 +91,9 @@ export const PokemonDetailsView = (
             <PokemonCard>
               <img src={this.state.data.picture} />
               <PokemonDetails>
-                <Text>{this.state.data.name}</Text>
+                <Name>{this.state.data.name}</Name>
+                <DetailsText>Height: {this.state.data.height}'</DetailsText>
+                <DetailsText>Weight: {this.state.data.weight}kgs</DetailsText>
               </PokemonDetails>
             </PokemonCard>
 
@@ -103,11 +114,6 @@ export const PokemonDetailsView = (
               {this.state.data.moves.map((move: string) => {
                 return <AbilityLabel key={move}>{move}</AbilityLabel>;
               })}
-            </div>
-
-            <div>
-              <Text>Details</Text>
-              <Text>Weight: {this.state.data.weight}</Text>
             </div>
           </div>
         </PokemonDetailsWrapper>

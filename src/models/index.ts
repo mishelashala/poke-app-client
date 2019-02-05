@@ -33,6 +33,7 @@ export interface IPokemonMoveDto {
 // Pokemon Details
 export interface IPokemonDetailsDto {
   abilities: IAbilityDto[];
+  height: number;
   id: string;
   moves: IPokemonMoveDto[];
   name: string;
@@ -45,6 +46,7 @@ export interface IPokemonDetailsDto {
 
 export interface IPokemonDetails {
   abilities: string[];
+  height: number;
   id: string;
   moves: string[];
   name: string;

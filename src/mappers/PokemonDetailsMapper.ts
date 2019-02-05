@@ -32,6 +32,7 @@ export const getMoves = (moves: IPokemonMoveDto[]): string[] => {
 const toEntity = (detailsDto: IPokemonDetailsDto): IPokemonDetails => {
   return {
     abilities: getAbilities(detailsDto.abilities),
+    height: detailsDto.height,
     id: detailsDto.id,
     moves: getMoves(detailsDto.moves),
     name: capitalize(detailsDto.name),
