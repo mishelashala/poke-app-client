@@ -1,4 +1,4 @@
-import { IPokemon } from "../models/";
+import { IPokemon, IPokemonDetails } from "../models/";
 import { createReducer } from "./createReducer";
 
 // ACTIONS
@@ -57,8 +57,15 @@ export const fetchDetailsByNameStarted = (name: string) => ({
 });
 
 // fetchDetailsByNameSucceed :: IPokemonDetails -> IFluxStandardAction
-export const fetchDetailsByNameSucceed = () => ({
-  type: FETCH_POKEMON_DETAILS_BY_NAME_SUCCESS
+export const fetchDetailsByNameSucceed = (
+  name: string,
+  data: IPokemonDetails
+) => ({
+  type: FETCH_POKEMON_DETAILS_BY_NAME_SUCCESS,
+  payload: {
+    name,
+    data
+  }
 });
 
 // fetchDetailsByNameFailed :: Error -> IFluxStandardAction
@@ -158,8 +165,7 @@ const pokemonReducer = createReducer<IPokemonState>(initialState(), {
         ...state.data,
         [action.payload.name]: {
           ...state.data[action.payload.name],
-          picture: action.payload.data.picture,
-          type: action.payload.data.types,
+          ...action.payload.data,
           _meta: {
             isLoading: false,
             isCached: true

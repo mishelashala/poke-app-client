@@ -5,4 +5,4 @@ export interface IPokemonDetails {
   };
 }
 
-export { PokemonDetailsView } from "./PokemonDetails";
+export { PokemonDetailsViewContainer as PokemonDetailsView } from "./container";
