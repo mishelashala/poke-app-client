@@ -1,42 +1,17 @@
 import React from "react";
-import styled from "styled-components";
 import { IPokemonDetailsService } from "../../services/PokemonDetailsService";
 import { IPokemonDetails } from "../../models/";
-import { Text, PokemonCard, PokemonDetails, ViewTitle } from "../../ui";
+import { PokemonCard, PokemonDetails, ViewTitle } from "../../ui";
 import { TypeList } from "../../modules/TypeList";
-
-const PokemonDetailsWrapper = styled.section`
-  box-sizing: border-box;
-  padding: 1rem;
-`;
-
-const DetailsViewTitle = styled(ViewTitle)`
-  margin-bottom: 0.25rem;
-  text-align: left;
-`;
-
-const TypeListWrapper = styled.div`
-  margin-bottom: 1.25rem;
-  text-align: left;
-`;
-
-const AbilityLabel = styled(Text)`
-  background-color: #f2f2f2;
-  border-radius: 1rem;
-  color: black;
-  display: inline-block;
-  font-size: 0.9rem;
-  margin-right: 0.5rem;
-  padding: 0.25rem 0.5rem;
-`;
-
-const DetailsText = styled(Text)`
-  margin-top: 0.2rem;
-`;
-
-const Name = styled(Text)`
-  margin-bottom: 0.5rem;
-`;
+import {
+  PokemonDetailsWrapper,
+  DetailsViewTitle,
+  TypeListWrapper,
+  AbilityLabel,
+  DetailsText,
+  Name,
+  DetailsTypeWrapper
+} from "./ui";
 
 interface IPokemonDetailsViewProps {
   match: {
@@ -103,18 +78,18 @@ export const PokemonDetailsView = (
             </TypeListWrapper>
 
             <DetailsViewTitle>Abilities</DetailsViewTitle>
-            <div style={{ marginBottom: "1.5rem", textAlign: "left" }}>
+            <DetailsTypeWrapper>
               {this.state.data.abilities.map((ability: string) => {
                 return <AbilityLabel key={ability}>{ability}</AbilityLabel>;
               })}
-            </div>
+            </DetailsTypeWrapper>
 
             <DetailsViewTitle>Moves</DetailsViewTitle>
-            <div style={{ marginBottom: "1.5rem", textAlign: "left" }}>
+            <DetailsTypeWrapper>
               {this.state.data.moves.map((move: string) => {
                 return <AbilityLabel key={move}>{move}</AbilityLabel>;
               })}
-            </div>
+            </DetailsTypeWrapper>
           </div>
         </PokemonDetailsWrapper>
       );
