@@ -1,4 +1,4 @@
-import { IPokemon, IPokemonDetails } from "../models/";
+import { IFluxStandardAction, IPokemon, IPokemonDetails } from "../models/";
 import { createReducer } from "./createReducer";
 
 // ACTIONS
@@ -23,7 +23,7 @@ export const FETCH_POKEMON_DETAILS_BY_NAME_FAIL =
 // ACTION CREATORS
 
 // fetchAllStarted :: () -> IFluxStandardAction
-export const fetchAllStarted = () => {
+export const fetchAllStarted = (): IFluxStandardAction => {
   return {
     type: FETCH_ALL_POKEMONS_STARTED
   };
@@ -32,7 +32,7 @@ export const fetchAllStarted = () => {
 // fetchAllFailed :: Error -> IFluxStandardAction
 export const fetchAllFailed = (error: Error) => {
   return {
-    type: FETCH_ALL_POKEMONS_STARTED,
+    type: FETCH_ALL_POKEMONS_FAILED,
     error: true,
     payload: error
   };
@@ -69,10 +69,11 @@ export const fetchDetailsByNameSucceed = (
 });
 
 // fetchDetailsByNameFailed :: Error -> IFluxStandardAction
-export const fetchDetailsByNameFailed = (error: Error) => ({
+export const fetchDetailsByNameFailed = (error: Error, name: string) => ({
   type: FETCH_POKEMON_DETAILS_BY_NAME_FAIL,
   payload: error,
-  error: true
+  error: true,
+  name
 });
 
 // searchChanged :: String -> IFluxStandardAction
@@ -106,7 +107,7 @@ export interface IPokemonState {
 export const initialState = (): IPokemonState => ({
   data: {},
   error: undefined,
-  isLoading: true,
+  isLoading: false,
   isCached: false,
   search: "",
   filterByType: []

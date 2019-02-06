@@ -13,7 +13,7 @@ export const filterPokemonsByType = (types: string[], pokemons: IPokemon[]) => {
   }
 
   return pokemons.filter((p: IPokemon) =>
-    types.every((t: string) => p.type.includes(t))
+    types.every((t: string) => p.types.includes(t))
   );
 };
 

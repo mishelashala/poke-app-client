@@ -21,7 +21,7 @@ export const PokemonList: React.FunctionComponent<
           key={pokemon.name}
           name={pokemon.name}
           picture={pokemon.picture}
-          type={pokemon.type}
+          type={pokemon.types}
           isLoading={pokemon._meta.isLoading}
           isCached={pokemon._meta.isCached}
         />

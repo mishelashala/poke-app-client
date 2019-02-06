@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch: Function) => {
         console.log("POKEMON:", pokemon);
         dispatch(pokemons.fetchDetailsByNameSucceed(name, pokemon));
       } catch (err) {
-        dispatch(pokemons.fetchDetailsByNameFailed(err));
+        dispatch(pokemons.fetchDetailsByNameFailed(err, name));
       }
     }
   };

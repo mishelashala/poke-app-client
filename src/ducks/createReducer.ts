@@ -1,8 +1,4 @@
-interface IFluxStandardAction {
-  error?: Error;
-  payload: any;
-  type: string;
-}
+import { IFluxStandardAction } from "../models";
 
 type ReduxReducer = <T>(s: T, a: IFluxStandardAction) => T;
 

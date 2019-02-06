@@ -5,7 +5,7 @@ const toEntity = (pokemonDto: IPokemonDto): IPokemon => {
   return {
     id: pokemonDto.name,
     name: capitalize(pokemonDto.name),
-    type: [],
+    types: [],
     picture: "",
     _meta: {
       isLoading: true,

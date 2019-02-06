@@ -1,8 +1,15 @@
+// Redux Related
+export interface IFluxStandardAction {
+  error?: boolean;
+  payload?: any;
+  type: string;
+}
+
 // Pokemon
 export interface IPokemon {
   id: string;
   name: string;
-  type: string[];
+  types: string[];
   picture: string;
   _meta: {
     isLoading: boolean;
