@@ -1,5 +1,6 @@
 import { IPokemon } from "../models/";
 import pokemonMapper from "../mappers/PokemonMapper";
+import * as serviceErrorStrategy from "../strategies/ServiceErrorStrategy";
 
 export interface IGetAllPokemonResponse {
   results: IPokemon[];
@@ -12,14 +13,16 @@ export interface IPokemonService {
 export const PokemonService = (gateway: any): IPokemonService => {
   // getAll :: String -> Promise IGetAllPokemonResponse
   const getAll = (): Promise<IGetAllPokemonResponse> => {
-    return new Promise(resolve => {
-      setTimeout(async () => {
+    return new Promise(async (resolve, reject) => {
+      try {
         const res = await gateway.getPokemons();
         resolve({
           ...res.data,
           results: res.data.results.map(pokemonMapper.toEntity)
         });
-      }, 1500);
+      } catch (err) {
+        reject(serviceErrorStrategy.handleError(err));
+      }
     });
   };
 

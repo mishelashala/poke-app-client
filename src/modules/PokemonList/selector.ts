@@ -37,3 +37,12 @@ export const getPokemons = (state: IAppState): IPokemon[] => {
     filterPokemonsByName(state.pokemons.search, pokemonList)
   );
 };
+
+// getError :: IAppState -> String
+export const getError = (state: IAppState): string => {
+  if (state.pokemons.error) {
+    return state.pokemons.error.message;
+  }
+
+  return "";
+};
