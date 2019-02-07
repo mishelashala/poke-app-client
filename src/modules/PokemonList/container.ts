@@ -3,18 +3,10 @@ import { PokemonList } from "./PokemonList";
 import { getPokemons, getError } from "./selector";
 import apiGateway from "../../api-gateways/HttpApiGateway";
 import { PokemonService } from "../../services/PokemonService";
-import * as pokemons from "../../ducks/pokemons";
-import { IPokemon } from "../../models";
+import { pokemonThunks } from "../../ducks/pokemons";
 
 const pokemonService = PokemonService(apiGateway);
-
-const serialize = <T>(key: string, arr: T[]): any => {
-  return arr.reduce((json: any, item: any) => {
-    const formatedKey = item[key].toLowerCase();
-    json[formatedKey] = item;
-    return json;
-  }, {});
-};
+const thunks = pokemonThunks(pokemonService);
 
 const mapStateToProps = (state: any) => {
   return {
@@ -27,15 +19,7 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: Function) => {
   return {
     onClickRetry: async () => {
-      try {
-        dispatch(pokemons.fetchAllStarted());
-        const data = await pokemonService.getAll();
-        dispatch(
-          pokemons.fetchAllSucceed(serialize<IPokemon>("name", data.results))
-        );
-      } catch (err) {
-        dispatch(pokemons.fetchAllFailed(err));
-      }
+      dispatch(thunks.fetchAllPokemons());
     }
   };
 };

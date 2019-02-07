@@ -3,18 +3,10 @@ import apiGateway from "../../api-gateways/HttpApiGateway";
 import { PokemonService } from "../../services/PokemonService";
 import { IAppState } from "../../ducks";
 import * as pokemons from "../../ducks/pokemons";
-import { IPokemon } from "../../models";
 import { HomeView } from "./Home";
 
 const pokemonService = PokemonService(apiGateway);
-
-const serialize = <T>(key: string, arr: T[]): any => {
-  return arr.reduce((json: any, item: any) => {
-    const formatedKey = item[key].toLowerCase();
-    json[formatedKey] = item;
-    return json;
-  }, {});
-};
+const thunks = pokemons.pokemonThunks(pokemonService);
 
 const mapStateToProps = (state: IAppState) => {
   return {
@@ -27,15 +19,7 @@ const mapStateToProps = (state: IAppState) => {
 const mapDispatchToProps = (dispatch: Function) => {
   return {
     fetchPokemons: async () => {
-      try {
-        dispatch(pokemons.fetchAllStarted());
-        const data = await pokemonService.getAll();
-        dispatch(
-          pokemons.fetchAllSucceed(serialize<IPokemon>("name", data.results))
-        );
-      } catch (err) {
-        dispatch(pokemons.fetchAllFailed(err));
-      }
+      dispatch(thunks.fetchAllPokemons());
     },
 
     handleSearchChange: ({ target: { value = "" } }: any) => {

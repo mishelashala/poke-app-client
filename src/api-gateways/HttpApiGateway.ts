@@ -5,7 +5,7 @@ const getPokemons = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.get(
-        "https://pokeapi.co/api/v2/pokemon/asdf?limit=100"
+        "https://pokeapi.co/api/v2/pokemon?limit=100"
       );
       resolve(res);
     } catch (err) {

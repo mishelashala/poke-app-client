@@ -1,6 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-import { Text } from "../../ui";
+import { Text, Retry } from "../../ui";
 import { PokemonItem } from "./PokemonItem";
 import { IPokemon } from "../../models/";
 
@@ -10,16 +9,6 @@ interface IPokemonListProps {
   error: string;
   onClickRetry: () => any;
 }
-
-const Retry = styled(Text)`
-  color: blue;
-  display: inline-block;
-
-  :hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-`;
 
 export const PokemonList: React.FunctionComponent<
   IPokemonListProps

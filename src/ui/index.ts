@@ -6,6 +6,7 @@ export { LoadingImage } from "./LoadingImage";
 export { LoadingTitle } from "./LoadingTitle";
 export { PokemonCard } from "./PokemonCard";
 export { PokemonDetails } from "./PokemonDetails";
+export { Retry } from "./Retry";
 export { SearchBar } from "./SearchBar";
 export { SectionTitle } from "./SectionTitle";
 export { Text } from "./Text";
