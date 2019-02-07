@@ -1,5 +1,6 @@
 import { IFluxStandardAction, IPokemon, IPokemonDetails } from "../models/";
 import { IPokemonService } from "../services/PokemonService";
+import { IPokemonDetailsService } from "../services/PokemonDetailsService";
 import { serialize } from "../utils/serialize";
 import { createReducer } from "./createReducer";
 
@@ -112,6 +113,26 @@ export const pokemonThunks = (pokemonService: IPokemonService) => {
   };
 
   return { fetchAllPokemons };
+};
+
+// pokemonDeailsThunks :: IPokemonDetailsService
+export const pokemonDeailsThunks = (
+  pokemonDetailsService: IPokemonDetailsService
+) => {
+  // fetchPokemonDetailsByName :: String -> ReduxThunk
+  const fetchPokemonDetailsByName = (name: string) => async (
+    dispatch: Function
+  ) => {
+    try {
+      dispatch(fetchDetailsByNameStarted(name));
+      const pokemon = await pokemonDetailsService.getDetailsByName(name);
+      dispatch(fetchDetailsByNameSucceed(name, pokemon));
+    } catch (err) {
+      dispatch(fetchDetailsByNameFailed(err, name));
+    }
+  };
+
+  return { fetchPokemonDetailsByName };
 };
 
 // REDUCER

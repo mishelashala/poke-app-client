@@ -3,18 +3,20 @@ import apiGateway from "../../api-gateways/HttpApiGateway";
 import * as pokemons from "../../ducks/pokemons";
 import { PokemonDetailsService } from "../../services/PokemonDetailsService";
 import { PokemonDetailsView, IPokemonDetailsViewProps } from "./PokemonDetails";
+import { getPokemonName, getData, isLoading, isCached } from "./selector";
 
 const pokemonDetailsService = PokemonDetailsService(apiGateway);
+const thunks = pokemons.pokemonDeailsThunks(pokemonDetailsService);
 
 const mapStateToProps = (state: any, ownProps: IPokemonDetailsViewProps) => {
-  const pokemonName = ownProps.match.params.pokemonName.toLowerCase();
-  const data = state.pokemons.data[pokemonName] || {};
-  const isLoading = Object.keys(data).length === 0 || data._meta.isLoading;
-  const isCached = Object.keys(data).length !== 0 && data._meta.isCached;
+  const pokemonName = getPokemonName(ownProps);
+  const data = getData(state, pokemonName);
+  const loading = isLoading(state, pokemonName);
+  const cached = isCached(state, pokemonName);
 
   return {
-    isCached,
-    isLoading,
+    isCached: cached,
+    isLoading: loading,
     data,
     pokemonName
   };
@@ -23,14 +25,7 @@ const mapStateToProps = (state: any, ownProps: IPokemonDetailsViewProps) => {
 const mapDispatchToProps = (dispatch: Function) => {
   return {
     getPokemonDetails: async (name: string) => {
-      try {
-        dispatch(pokemons.fetchDetailsByNameStarted(name));
-        const pokemon = await pokemonDetailsService.getDetailsByName(name);
-        console.log("POKEMON:", pokemon);
-        dispatch(pokemons.fetchDetailsByNameSucceed(name, pokemon));
-      } catch (err) {
-        dispatch(pokemons.fetchDetailsByNameFailed(err, name));
-      }
+      dispatch(thunks.fetchPokemonDetailsByName(name));
     }
   };
 };
