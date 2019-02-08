@@ -1,13 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PokemonList } from "../../modules/PokemonList";
 import { FilterByType } from "../../modules/FilterByType";
-import {
-  ViewTitle,
-  LoadingCard,
-  LoadingTitle,
-  SearchBar,
-  Wrapper
-} from "../../ui/";
+import { ViewTitle, SearchBar, Wrapper } from "../../ui/";
+import { HomeViewLoading } from "./HomeViewLoading";
 
 interface IHomeViewProps {
   isCached: boolean;
@@ -17,39 +12,30 @@ interface IHomeViewProps {
   handleSearchChange: (e: any) => void;
 }
 
-export class HomeView extends React.Component<IHomeViewProps> {
-  async componentDidMount() {
-    if (!this.props.isCached) {
-      this.props.fetchPokemons();
+export const HomeView: React.FC<IHomeViewProps> = props => {
+  useEffect(() => {
+    if (!props.isCached) {
+      props.fetchPokemons();
     }
+  });
+
+  if (props.isLoading) {
+    return <HomeViewLoading />;
   }
 
-  render() {
-    if (this.props.isLoading) {
-      return (
-        <Wrapper>
-          <LoadingTitle />
-          <LoadingCard />
-          <LoadingCard />
-          <LoadingCard />
-        </Wrapper>
-      );
-    }
+  return (
+    <Wrapper>
+      <ViewTitle>Pokemon List</ViewTitle>
+      <SearchBar
+        placeholder="Search pokemon by name"
+        type="search"
+        value={props.search}
+        onChange={props.handleSearchChange}
+      />
 
-    return (
-      <Wrapper>
-        <ViewTitle>Pokemon List</ViewTitle>
-        <SearchBar
-          placeholder="Search pokemon by name"
-          type="search"
-          value={this.props.search}
-          onChange={this.props.handleSearchChange}
-        />
+      <FilterByType />
 
-        <FilterByType />
-
-        <PokemonList />
-      </Wrapper>
-    );
-  }
-}
+      <PokemonList />
+    </Wrapper>
+  );
+};
