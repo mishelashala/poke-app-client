@@ -1,19 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { Text, PokemonCard, PokemonDetails, LoadingImage } from "../../../ui";
 import { TypeList } from "../../TypeList";
-
-const PokemonItemImage = styled.img`
-  border-radius: 50%;
-  box-sizing: border-box;
-  height: 96px;
-  margin: 0.5rem auto;
-`;
-
-const PokemonTypes = styled.div`
-  margin: 0.75rem 0 0.25rem 0;
-`;
+import { PokemonItemTypes } from "./PokemonItemTypes";
+import { PokemonItemImage } from "./PokemonItemImage";
 
 interface IPokemonItemProps {
   isLoading: boolean;
@@ -24,31 +14,27 @@ interface IPokemonItemProps {
   isCached: boolean;
 }
 
-export class PokemonItem extends React.Component<IPokemonItemProps> {
-  componentDidMount() {
-    if (!this.props.isCached) {
-      this.props.fetchPokemon(this.props.name.toLowerCase());
+export const PokemonItem: React.FC<IPokemonItemProps> = props => {
+  useEffect(() => {
+    if (!props.isCached) {
+      props.fetchPokemon(props.name.toLowerCase());
     }
-  }
+  });
 
-  render() {
-    return (
-      <Link to={`/pokemon/${this.props.name}`}>
-        <PokemonCard>
-          {this.props.isLoading && <LoadingImage />}
+  return (
+    <Link to={`/pokemon/${props.name}`}>
+      <PokemonCard>
+        {props.isLoading && <LoadingImage />}
 
-          {!this.props.isLoading && (
-            <PokemonItemImage src={this.props.picture} />
-          )}
+        {!props.isLoading && <PokemonItemImage src={props.picture} />}
 
-          <PokemonDetails>
-            <Text>{this.props.name}</Text>
-            <PokemonTypes>
-              <TypeList data={this.props.type} />
-            </PokemonTypes>
-          </PokemonDetails>
-        </PokemonCard>
-      </Link>
-    );
-  }
-}
+        <PokemonDetails>
+          <Text>{props.name}</Text>
+          <PokemonItemTypes>
+            <TypeList data={props.type} />
+          </PokemonItemTypes>
+        </PokemonDetails>
+      </PokemonCard>
+    </Link>
+  );
+};
