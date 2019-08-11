@@ -3,7 +3,7 @@ import { IFluxStandardAction, IPokemon, IPokemonDetails } from "../models/";
 import { IPokemonService } from "../services/PokemonService";
 import { IPokemonDetailsService } from "../services/PokemonDetailsService";
 import { serialize } from "../utils/serialize";
-import { createReducer } from "./createReducer";
+import { assoc, pipe, assocPath } from "lodash/fp";
 
 // ACTIONS
 export const FETCH_ALL_POKEMONS_STARTED =
@@ -166,83 +166,59 @@ export const initialState = (): IPokemonState => ({
 });
 
 // pokemonReducer :: (IPokemonState, IReduxAction) => IPokemonState
-const pokemonReducer = createReducer<IPokemonState>(initialState(), {
-  [FETCH_ALL_POKEMONS_STARTED]: state => {
-    return { ...state, isLoading: true };
-  },
-  [FETCH_ALL_POKEMONS_SUCCEED]: (state: any, action: any) => {
-    return {
-      ...state,
-      isLoading: false,
-      data: action.payload.pokemons,
-      isCached: true
-    };
-  },
-  [FETCH_ALL_POKEMONS_FAILED]: (state, action) => {
-    return {
-      ...state,
-      isLoading: false,
-      error: action.payload
-    };
-  },
-  [SEARCH_CHANGED]: (state, action) => {
-    return {
-      ...state,
-      search: action.payload.search
-    };
-  },
-  [FILTER_BY_TYPE_CHANGED]: (state, action) => {
-    return {
-      ...state,
-      filterByType: action.payload.types
-    };
-  },
-  [FETCH_POKEMON_DETAILS_BY_NAME_START]: (state: any, action) => {
-    return {
-      ...state,
-      data: {
-        ...state.data,
-        [action.payload.name]: {
-          ...state.data[action.payload.name],
-          _meta: {
-            isLoading: true
-          }
-        }
-      }
-    };
-  },
-  [FETCH_POKEMON_DETAILS_BY_NAME_SUCCESS]: (state: any, action) => {
-    return {
-      ...state,
-      data: {
-        ...state.data,
-        [action.payload.name]: {
-          ...state.data[action.payload.name],
-          ...action.payload.data,
-          _meta: {
-            isLoading: false,
-            isCached: true
-          }
-        }
-      }
-    };
-  },
-  [FETCH_POKEMON_DETAILS_BY_NAME_FAIL]: (state: any, action: any) => {
-    return {
-      ...state,
-      data: {
-        ...state.data,
-        [action.name]: {
-          ...state.data[action.name],
+const pokemonReducer = (
+  state: IPokemonState = initialState(),
+  action: IFluxStandardAction
+): IPokemonState => {
+  switch (action.type) {
+    case FETCH_ALL_POKEMONS_STARTED:
+      return assoc("isLoading", true, state);
 
-          _meta: {
-            isLoading: false,
-            error: action.payload
-          }
-        }
-      }
-    };
+    case FETCH_ALL_POKEMONS_SUCCEED:
+      return pipe(
+        assoc("isLoading", false),
+        assoc("data", action.payload.pokemons),
+        assoc("isCached", true)
+      )(state) as IPokemonState;
+
+    case FETCH_ALL_POKEMONS_FAILED:
+      return pipe(
+        assoc("isLoading", false),
+        assoc("error", action.payload)
+      )(state) as IPokemonState;
+
+    case SEARCH_CHANGED:
+      return assoc("search", action.payload.search, state) as IPokemonState;
+
+    case FILTER_BY_TYPE_CHANGED:
+      return assoc("filterByType", action.payload.types, state);
+
+    case FETCH_POKEMON_DETAILS_BY_NAME_START:
+      return assocPath(
+        ["data", action.payload.name, "_meta", "isLoading"],
+        true,
+        state
+      ) as IPokemonState;
+
+    case FETCH_POKEMON_DETAILS_BY_NAME_SUCCESS:
+      return pipe(
+        assocPath(["data", action.payload.name], action.payload.data),
+        assocPath(["data", action.payload.name, "_meta", "isLoading"], false),
+        assocPath(["data", action.payload.name, "_meta", "isCached"], true)
+      )(state) as IPokemonState;
+
+    case FETCH_POKEMON_DETAILS_BY_NAME_FAIL:
+      return pipe(
+        assocPath(["data", action.payload.name, "_meta", "isLoading"], false),
+        assocPath(
+          ["data", action.payload.name, "_meta", "error"],
+          action.payload
+        )
+      )(state) as IPokemonState;
+
+    default:
+      return state;
   }
-});
+};
 
 export default pokemonReducer;

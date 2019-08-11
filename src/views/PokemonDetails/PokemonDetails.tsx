@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IPokemonDetailsThunks } from "../../ducks/pokemons";
 import { IPokemonDetails } from "../../models";
 import * as selectors from "./selectors";
+import { path, defaultTo } from "lodash/fp";
 
 export interface IPokemonDetailsViewProps {
   match: {
@@ -71,16 +72,20 @@ export const PokemonDetailsViewFactory = (
 
           <DetailsViewTitle>Abilities</DetailsViewTitle>
           <DetailsTypeWrapper>
-            {data.abilities.map((ability: string) => {
-              return <AbilityLabel key={ability}>{ability}</AbilityLabel>;
-            })}
+            {defaultTo([] as string[], path("abilities", data)).map(
+              (ability: string) => {
+                return <AbilityLabel key={ability}>{ability}</AbilityLabel>;
+              }
+            )}
           </DetailsTypeWrapper>
 
           <DetailsViewTitle>Moves</DetailsViewTitle>
           <DetailsTypeWrapper>
-            {data.moves.map((move: string) => {
-              return <AbilityLabel key={move}>{move}</AbilityLabel>;
-            })}
+            {defaultTo([] as string[], path("moves", data)).map(
+              (move: string) => {
+                return <AbilityLabel key={move}>{move}</AbilityLabel>;
+              }
+            )}
           </DetailsTypeWrapper>
         </div>
       </PokemonDetailsWrapper>

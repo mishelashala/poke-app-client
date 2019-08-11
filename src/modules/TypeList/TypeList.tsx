@@ -41,7 +41,9 @@ export interface ITypeListProps {
   data: string[];
 }
 
-export const TypeList: React.FunctionComponent<ITypeListProps> = ({ data }) => (
+export const TypeList: React.FunctionComponent<ITypeListProps> = ({
+  data = []
+}) => (
   <div>
     {data.map(type => (
       <TypeLabel key={type} type={type}>
