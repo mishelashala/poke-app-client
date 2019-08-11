@@ -1,18 +1,24 @@
-import React from "react";
 import styled from "styled-components";
-import { Text } from "../../atoms/Text";
-import * as colors from "../../styles/colors";
+import { Text } from "../atoms/Text";
+import * as colors from "../styles/colors";
+
+export enum PokemonType {
+  POISON = "poison",
+  GRASS = "grass",
+  FIRE = "fire",
+  WATER = "water"
+}
 
 // getTypeLabelBackgroundColor :: String -> String
 const getTypeLabelBackgroundColor = (type: string = ""): string => {
   switch (type) {
-    case "poison":
+    case PokemonType.POISON:
       return colors.LABEL_PURPLE;
-    case "grass":
+    case PokemonType.GRASS:
       return colors.LABEL_GREEN;
-    case "fire":
+    case PokemonType.FIRE:
       return colors.LABEL_ORANGE;
-    case "water":
+    case PokemonType.WATER:
       return colors.LABEL_BLUE;
     default:
       return colors.LABEL_GRAY;
@@ -33,23 +39,3 @@ export const TypeLabel = styled(Text)<ITypeLabelProps>`
   border-radius: 0.75rem;
   margin-right: 0.5rem;
 `;
-
-export const TypeListContent = styled.div`
-  text-align: left;
-`;
-
-export interface ITypeListProps {
-  data: string[];
-}
-
-export const TypeList: React.FunctionComponent<ITypeListProps> = ({
-  data = []
-}) => (
-  <div>
-    {data.map(type => (
-      <TypeLabel key={type} type={type}>
-        {type}
-      </TypeLabel>
-    ))}
-  </div>
-);
