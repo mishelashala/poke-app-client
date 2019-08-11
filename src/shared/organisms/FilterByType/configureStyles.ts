@@ -1,5 +1,7 @@
 import * as colors from "../../styles/colors";
 import { IFilterByTypeOption } from "./index";
+import { assoc, pipe } from "lodash/fp";
+import { PokemonType } from "../../models/PokemonType";
 
 export interface IFilterByTypeConfig {
   data: IFilterByTypeOption;
@@ -8,13 +10,13 @@ export interface IFilterByTypeConfig {
 // getTypeLabelBackgroundColor :: String -> String
 const getTypeLabelBackgroundColor = (type: string = ""): string => {
   switch (type) {
-    case "poison":
+    case PokemonType.POISON:
       return colors.LABEL_PURPLE;
-    case "grass":
+    case PokemonType.GRASS:
       return colors.LABEL_GREEN;
-    case "fire":
+    case PokemonType.FIRE:
       return colors.LABEL_ORANGE;
-    case "water":
+    case PokemonType.WATER:
       return colors.LABEL_BLUE;
     default:
       return colors.LABEL_GRAY;
@@ -22,31 +24,26 @@ const getTypeLabelBackgroundColor = (type: string = ""): string => {
 };
 
 export const configureStyles = () => ({
-  container: (styles: React.CSSProperties) => {
-    return {
-      ...styles,
-      marginBottom: "0.75rem"
-    };
-  },
-  control: (styles: React.CSSProperties) => {
-    return { ...styles, fontFamily: "arial" };
-  },
-  option: (styles: React.CSSProperties) => {
-    return { ...styles, fontFamily: "arial" };
-  },
+  container: (styles: React.CSSProperties) =>
+    assoc("marginBottom", "0.75rem", styles) as React.CSSProperties,
+
+  control: (styles: React.CSSProperties) =>
+    assoc("fontFamily", "arial", styles) as React.CSSProperties,
+
+  option: (styles: React.CSSProperties) =>
+    assoc("fontFamily", "arial", styles) as React.CSSProperties,
+
   multiValue: (styles: React.CSSProperties, config: IFilterByTypeConfig) => {
-    return {
-      ...styles,
-      backgroundColor: getTypeLabelBackgroundColor(config.data.value),
-      color: "white",
-      fontFamily: "arial"
-    };
+    return pipe(
+      assoc("backgroundColor", getTypeLabelBackgroundColor(config.data.value)),
+      assoc("color", "white"),
+      assoc("fontFamily", "arial")
+    )(styles) as React.CSSProperties;
   },
-  multiValueLabel: (styles: React.CSSProperties) => {
-    return {
-      ...styles,
-      color: "white",
-      fontFamily: "arial"
-    };
-  }
+
+  multiValueLabel: (styles: React.CSSProperties) =>
+    pipe(
+      assoc("color", "white"),
+      assoc("fontFamily", "arial")
+    )(styles) as React.CSSProperties
 });

@@ -4,8 +4,6 @@ import { filterByTypeChanged } from "../../../shared/ducks/pokemons";
 import { IFilterByTypeOption } from "./index";
 import { FilterByType } from "./FilterByType";
 
-const mapStateToProps = () => ({});
-
 const mapDispatchToProps = (dispatch: Function) => ({
   handleChange: (types: IFilterByTypeOption[]) => {
     const filterValues = fp.map(fp.prop("value"), types);
@@ -14,6 +12,6 @@ const mapDispatchToProps = (dispatch: Function) => ({
 });
 
 export const FilterByTypeContainer = connect(
-  mapStateToProps,
+  undefined,
   mapDispatchToProps
 )(FilterByType);

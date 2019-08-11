@@ -1,13 +1,7 @@
 import styled from "styled-components";
 import { Text } from "../atoms/Text";
 import * as colors from "../styles/colors";
-
-export enum PokemonType {
-  POISON = "poison",
-  GRASS = "grass",
-  FIRE = "fire",
-  WATER = "water"
-}
+import { PokemonType } from "../models/PokemonType";
 
 // getTypeLabelBackgroundColor :: String -> String
 const getTypeLabelBackgroundColor = (type: string = ""): string => {

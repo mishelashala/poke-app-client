@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import Select from "react-select";
 import { configureStyles } from "./configureStyles";
 import { IFilterByTypeOption } from "./index";
