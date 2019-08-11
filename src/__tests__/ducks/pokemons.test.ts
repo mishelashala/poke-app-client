@@ -8,8 +8,9 @@ import pokemonReducer, {
   fetchDetailsByNameFailed,
   searchChanged,
   filterByTypeChanged
-} from "../../ducks/pokemons";
-import { IPokemon, IPokemonDetails } from "../../models";
+} from "../../shared/ducks/pokemons";
+import { IPokemon } from "../../shared/models/Pokemon";
+import { IPokemonDetails } from "../../shared/models/PokemonDetails";
 
 const pokemon = (): IPokemon => ({
   id: "1",
