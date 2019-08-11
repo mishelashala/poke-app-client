@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { PokemonCard } from "../../ui/atoms/PokemonCard";
-import { PokemonDetails } from "../../ui/atoms/PokemonDetails";
-import { ViewTitle } from "../../ui/atoms/ViewTitle";
-import { TypeList } from "../../modules/TypeList";
+import { PokemonCard } from "../../shared/atoms/PokemonCard";
+import { PokemonDetails } from "../../shared/atoms/PokemonDetails";
+import { ViewTitle } from "../../shared/atoms/ViewTitle";
+import { TypeList } from "../../shared/molecules/TypeList";
 import { DetailsText } from "./atoms/DetailsText";
 import { PokemonDetailsLoading } from "./molecules/PokemonDetailsLoading";
 import { useDispatch, useSelector } from "react-redux";

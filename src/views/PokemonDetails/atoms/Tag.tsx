@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Text } from "../../../ui/atoms/Text";
+import { Text } from "../../../shared/atoms/Text";
 
 export const Tag = styled(Text)`
   background-color: #f2f2f2;

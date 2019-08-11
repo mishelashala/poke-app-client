@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Text } from "../../../ui/atoms/Text";
-import { PokemonCard } from "../../../ui/atoms/PokemonCard";
-import { PokemonDetails } from "../../../ui/atoms/PokemonDetails";
-import { LoadingImage } from "../../../ui/atoms/LoadingImage";
+import { Text } from "../../../atoms/Text";
+import { PokemonCard } from "../../../atoms/PokemonCard";
+import { PokemonDetails } from "../../../atoms/PokemonDetails";
+import { LoadingImage } from "../../../atoms/LoadingImage";
 import { TypeList } from "../../TypeList";
 import { PokemonItemTypes } from "./PokemonItemTypes";
 import { PokemonItemImage } from "./PokemonItemImage";

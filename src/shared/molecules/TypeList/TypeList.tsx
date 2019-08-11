@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Text } from "../../ui/atoms/Text";
-import * as colors from "../../ui/styles/colors";
+import { Text } from "../../atoms/Text";
+import * as colors from "../../styles/colors";
 
 // getTypeLabelBackgroundColor :: String -> String
 const getTypeLabelBackgroundColor = (type: string = ""): string => {

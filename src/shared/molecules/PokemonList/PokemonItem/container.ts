@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import apiGateway from "../../../gateways/HttpApiGateway";
-import { PokemonDetailsService } from "../../../services/PokemonDetailsService";
+import apiGateway from "../../../../gateways/HttpApiGateway";
+import { PokemonDetailsService } from "../../../../services/PokemonDetailsService";
 import { PokemonItem } from "./PokemonItem";
 
 const pokemonDetailsService = PokemonDetailsService(apiGateway);

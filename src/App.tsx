@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
-import { NavBar } from "./modules/NavBar";
+import { NavBar } from "./shared/molecules/NavBar";
 import { HomeView } from "./views/Home";
 import { PokemonDetailsView } from "./views/PokemonDetails";
 import { configureStore } from "./configureStore";

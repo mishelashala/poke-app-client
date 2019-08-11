@@ -1,8 +1,8 @@
 import React from "react";
-import { Text } from "../../ui/atoms/Text";
-import { Retry } from "../../ui/atoms/Retry";
+import { Text } from "../../atoms/Text";
+import { Retry } from "../../atoms/Retry";
 import { PokemonItem } from "./PokemonItem";
-import { IPokemon } from "../../models/";
+import { IPokemon } from "../../../models";
 
 interface IPokemonListProps {
   isLoading: boolean;

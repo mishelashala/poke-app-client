@@ -1,6 +1,6 @@
 import { lowerCase } from "lodash/fp";
-import { IAppState } from "../../ducks";
-import { IPokemon } from "../../models/";
+import { IAppState } from "../../../ducks";
+import { IPokemon } from "../../../models";
 
 // toArray :: {[key: string]: T} -> T[]
 const toArray = (json: any) =>

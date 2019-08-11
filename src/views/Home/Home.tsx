@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { PokemonList } from "../../modules/PokemonList";
-import { FilterByType } from "../../modules/FilterByType";
-import { ViewTitle } from "../../ui/atoms/ViewTitle";
-import { SearchBar } from "../../ui/atoms/SearchBar";
-import { Wrapper } from "../../ui/atoms/Wrapper";
+import { PokemonList } from "../../shared/molecules/PokemonList";
+import { FilterByType } from "../../shared/molecules/FilterByType";
+import { ViewTitle } from "../../shared/atoms/ViewTitle";
+import { SearchBar } from "../../shared/atoms/SearchBar";
+import { Wrapper } from "../../shared/atoms/Wrapper";
 import { HomeViewLoading } from "./molecules/HomeViewLoading";
 import * as pokemonDucks from "../../ducks/pokemons";
 import * as pokemonSelector from "./selectors";
