@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { PokemonList } from "../../shared/molecules/PokemonList";
-import { FilterByType } from "../../shared/molecules/FilterByType";
-import { ViewTitle } from "../../shared/atoms/ViewTitle";
-import { SearchBar } from "../../shared/atoms/SearchBar";
-import { Wrapper } from "../../shared/atoms/Wrapper";
-import { HomeViewLoading } from "./molecules/HomeViewLoading";
-import * as pokemonDucks from "../../ducks/pokemons";
-import * as pokemonSelector from "./selectors";
+import { PokemonList } from "../../../shared/molecules/PokemonList";
+import { FilterByType } from "../../../shared/molecules/FilterByType";
+import { ViewTitle } from "../../../shared/atoms/ViewTitle";
+import { SearchBar } from "../../../shared/atoms/SearchBar";
+import { Wrapper } from "../../../shared/atoms/Wrapper";
+import { HomeViewLoading } from "../molecules/HomeViewLoading";
+import * as pokemonDucks from "../../../ducks/pokemons";
+import * as pokemonSelector from "../selectors";
 
-export const HomeViewFactory = (pokemonThunks: pokemonDucks.IPokemonThunks) => {
-  const HomeView: React.FC = () => {
+export const PokemonListViewFactory = (
+  pokemonThunks: pokemonDucks.IPokemonThunks
+) => {
+  const PokemonListView: React.FC = () => {
     const dispatch = useDispatch();
     const isCached = useSelector(pokemonSelector.selectIsCached);
     const isLoading = useSelector(pokemonSelector.selectIsLoading);
@@ -49,5 +51,5 @@ export const HomeViewFactory = (pokemonThunks: pokemonDucks.IPokemonThunks) => {
     );
   };
 
-  return HomeView;
+  return PokemonListView;
 };
