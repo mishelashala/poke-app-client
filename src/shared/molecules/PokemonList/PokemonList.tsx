@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "../../atoms/Text";
 import { Retry } from "../../atoms/Retry";
-import { PokemonItem } from "./PokemonItem";
+import { PokemonItem } from "../PokemonItem";
 import { IPokemon } from "../../models/Pokemon";
 
 interface IPokemonListProps {

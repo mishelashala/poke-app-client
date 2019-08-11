@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Text } from "../../../atoms/Text";
-import { PokemonCard } from "../../../atoms/PokemonCard";
-import { PokemonDetails } from "../../../atoms/PokemonDetails";
-import { LoadingImage } from "../../../atoms/LoadingImage";
-import { TypeList } from "../../TypeList";
+import { Text } from "../../../shared/atoms/Text";
+import { PokemonCard } from "../../../shared/atoms/PokemonCard";
+import { PokemonDetails } from "../../../shared/atoms/PokemonDetails";
+import { LoadingImage } from "../../../shared/atoms/LoadingImage";
+import { TypeList } from "../TypeList";
 import { PokemonItemTypes } from "./PokemonItemTypes";
 import { PokemonItemImage } from "./PokemonItemImage";
 
