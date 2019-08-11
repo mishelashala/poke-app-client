@@ -1,5 +1,7 @@
 import React from "react";
-import { LoadingCard, LoadingTitle, Wrapper } from "../../../ui";
+import { LoadingCard } from "../../../ui/atoms/LoadingCard";
+import { LoadingTitle } from "../../../ui/atoms/LoadingTitle";
+import { Wrapper } from "../../../ui/atoms/Wrapper";
 
 export const HomeViewLoading = () => (
   <Wrapper>

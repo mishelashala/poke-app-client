@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as colors from "./colors";
+import * as colors from "../styles/colors";
 
 export const PokemonDetails = styled.div`
   background-color: ${colors.BACKGROUND_WHITE};

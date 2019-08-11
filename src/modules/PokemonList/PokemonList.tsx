@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, Retry } from "../../ui";
+import { Text } from "../../ui/atoms/Text";
+import { Retry } from "../../ui/atoms/Retry";
 import { PokemonItem } from "./PokemonItem";
 import { IPokemon } from "../../models/";
 

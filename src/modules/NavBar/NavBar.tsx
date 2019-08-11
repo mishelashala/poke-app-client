@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Text } from "../../ui";
+import { Text } from "../../ui/atoms/Text";
 
 const NavBarWrapper = styled.nav`
   background-color: #ee6b2f;

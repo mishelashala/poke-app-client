@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
-import { PokemonCard, PokemonDetails, ViewTitle } from "../../ui";
+import { PokemonCard } from "../../ui/atoms/PokemonCard";
+import { PokemonDetails } from "../../ui/atoms/PokemonDetails";
+import { ViewTitle } from "../../ui/atoms/ViewTitle";
 import { TypeList } from "../../modules/TypeList";
 import { DetailsText } from "./atoms/DetailsText";
 import { PokemonDetailsLoading } from "./molecules/PokemonDetailsLoading";

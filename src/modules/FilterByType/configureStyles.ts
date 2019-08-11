@@ -1,4 +1,4 @@
-import { colors } from "../../ui/";
+import * as colors from "../../ui/styles/colors";
 import { IFilterByTypeOption } from "./index";
 
 export interface IFilterByTypeConfig {

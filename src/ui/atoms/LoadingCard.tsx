@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { loadingAnimation } from "./animations";
+import { loadingAnimation } from "../animations";
 
 export const LoadingCard = styled.div`
   animation: 0.5s ease ${loadingAnimation} infinite alternate;
