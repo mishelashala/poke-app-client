@@ -1,7 +1,11 @@
-import React, { CSSProperties } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 import Select from "react-select";
 import { configureStyles } from "./configureStyles";
 import { IFilterByTypeOption } from "./index";
+import { filterByTypeChanged } from "../../../shared/ducks/pokemons";
+import { map, prop } from "lodash/fp";
+import { ValueType } from "react-select/lib/types";
 
 const options: IFilterByTypeOption[] = [
   { value: "fire", label: "Fire" },
@@ -9,22 +13,25 @@ const options: IFilterByTypeOption[] = [
   { value: "water", label: "Water" }
 ];
 
-interface IFilterByTypeProps {
-  handleChange: (a: any) => void;
-}
-
 // FilterByType :: () -> React.FunctionComponent
-export const FilterByType: React.FunctionComponent<
-  IFilterByTypeProps
-> = props => (
-  <Select
-    isMulti
-    name="types"
-    options={options}
-    className="basic-multi-select"
-    classNamePrefix="select"
-    placeholder="Filter by Pokemon Type"
-    styles={configureStyles()}
-    onChange={props.handleChange}
-  />
-);
+export const FilterByType: React.SFC = () => {
+  const dispatch = useDispatch();
+
+  const handleChange = (types: ValueType<IFilterByTypeOption>) => {
+    const filterValues = map(prop("value"), types);
+    dispatch(filterByTypeChanged(filterValues));
+  };
+
+  return (
+    <Select
+      isMulti
+      name="types"
+      options={options}
+      className="basic-multi-select"
+      classNamePrefix="select"
+      placeholder="Filter by Pokemon Type"
+      styles={configureStyles()}
+      onChange={handleChange}
+    />
+  );
+};

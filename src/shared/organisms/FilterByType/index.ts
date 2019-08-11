@@ -3,4 +3,4 @@ export interface IFilterByTypeOption {
   label: string;
 }
 
-export { FilterByTypeContainer as FilterByType } from "./container";
+export { FilterByType } from "./FilterByType";
