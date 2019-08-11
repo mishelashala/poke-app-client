@@ -48,7 +48,6 @@ export const PokemonDetailsViewFactory = (
       [pokemonName]
     );
 
-    console.log(props.match);
     if (isLoading) {
       return <PokemonDetailsLoading />;
     }

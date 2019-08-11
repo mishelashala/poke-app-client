@@ -134,7 +134,7 @@ export const pokemonDeailsThunks = (
 ) => {
   // fetchPokemonDetailsByName :: String -> ReduxThunk
   const fetchPokemonDetailsByName = (name: string) => async (
-    dispatch: Function
+    dispatch: Dispatch
   ) => {
     try {
       dispatch(fetchDetailsByNameStarted(name));
