@@ -7,7 +7,7 @@ import { DetailsText } from "./atoms/DetailsText";
 import { PokemonDetailsLoading } from "./molecules/PokemonDetailsLoading";
 import { useDispatch, useSelector } from "react-redux";
 import { IPokemonDetailsThunks } from "../../ducks/pokemons";
-import { IPokemonDetails } from "../../models";
+import { IPokemonDetails } from "../../shared/models/PokemonDetails";
 import * as selectors from "./selectors";
 import { path, defaultTo } from "lodash/fp";
 import { PokemonName } from "./atoms/PokemonName";

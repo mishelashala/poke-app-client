@@ -1,11 +1,9 @@
 import { capitalize } from "lodash/fp";
-import {
-  IPokemonDetails,
-  IPokemonDetailsDto,
-  IPokemonTypeDto,
-  IPokemonMoveDto,
-  IAbilityDto
-} from "../models";
+import { IPokemonMoveDto } from "../shared/dtos/PokemonMoveDto";
+import { IAbilityDto } from "../shared/dtos/AbilityDto";
+import { IPokemonDetailsDto } from "../shared/dtos/PokemonDetailsDto";
+import { IPokemonTypeDto } from "../shared/dtos/PokemonTypeDto";
+import { IPokemonDetails } from "../shared/models/PokemonDetails";
 
 // getAbilities :: IAbilityDto[] -> String[]
 export const getAbilities = (abilities: IAbilityDto[]): string[] => {

@@ -1,5 +1,5 @@
 import pokemonDetailsMapper from "../mappers/PokemonDetailsMapper";
-import { IPokemonDetails } from "../models/";
+import { IPokemonDetails } from "../shared/models/PokemonDetails";
 
 export interface IPokemonDetailsService {
   getDetailsByName: (name: string) => Promise<IPokemonDetails>;

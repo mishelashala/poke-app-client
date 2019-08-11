@@ -1,5 +1,5 @@
 import { IAppState } from "../../ducks";
-import { IPokemonDetails } from "../../models";
+import { IPokemonDetails } from "../../shared/models/PokemonDetails";
 
 export const selectPokemon = (pokemonName: string) => (
   state: IAppState
