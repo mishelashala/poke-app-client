@@ -1,21 +1,19 @@
 import React, { useEffect } from "react";
 import { PokemonCard, PokemonDetails, ViewTitle } from "../../ui";
 import { TypeList } from "../../modules/TypeList";
-import {
-  PokemonDetailsWrapper,
-  DetailsViewTitle,
-  TypeListWrapper,
-  AbilityLabel,
-  DetailsText,
-  Name,
-  DetailsTypeWrapper
-} from "./ui";
-import { PokemonDetailsLoading } from "./PokemonDetailsLoading";
+import { DetailsText } from "./atoms/DetailsText";
+import { PokemonDetailsLoading } from "./molecules/PokemonDetailsLoading";
 import { useDispatch, useSelector } from "react-redux";
 import { IPokemonDetailsThunks } from "../../ducks/pokemons";
 import { IPokemonDetails } from "../../models";
 import * as selectors from "./selectors";
 import { path, defaultTo } from "lodash/fp";
+import { DetailsTypeWrapper } from "./atoms/DetailsWrapper";
+import { PokemonName } from "./atoms/PokemonName";
+import { PokemonDetailsWrapper } from "./atoms/PokemonDetailsWrapper";
+import { DetailsViewTitle } from "./atoms/DetailsViewTitle";
+import { TypeListWrapper } from "./atoms/TypeListWrapper";
+import { AbilityLabel } from "./atoms/AbilityLabel";
 
 export interface IPokemonDetailsViewProps {
   match: {
@@ -59,7 +57,7 @@ export const PokemonDetailsViewFactory = (
           <PokemonCard>
             <img src={data.picture} />
             <PokemonDetails>
-              <Name>{data.name}</Name>
+              <PokemonName>{data.name}</PokemonName>
               <DetailsText>Height: {data.height}'</DetailsText>
               <DetailsText>Weight: {data.weight}kgs</DetailsText>
             </PokemonDetails>
