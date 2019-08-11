@@ -1,25 +1,36 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { PokemonList } from "../../modules/PokemonList";
 import { FilterByType } from "../../modules/FilterByType";
 import { ViewTitle, SearchBar, Wrapper } from "../../ui/";
 import { HomeViewLoading } from "./HomeViewLoading";
+import * as pokemons from "../../ducks/pokemons";
+const pokemonService = PokemonService(apiGateway);
+import apiGateway from "../../gateways/HttpApiGateway";
+import { PokemonService } from "../../services/PokemonService";
+import { IAppState } from "../../ducks";
 
-interface IHomeViewProps {
-  isCached: boolean;
-  isLoading: boolean;
-  fetchPokemons: () => any;
-  search: string;
-  handleSearchChange: (e: any) => void;
-}
+const thunks = pokemons.pokemonThunks(pokemonService);
 
-export const HomeView: React.FC<IHomeViewProps> = props => {
+export const HomeView: React.FC = () => {
+  const dispatch = useDispatch();
+  const isCached = useSelector((state: IAppState) => state.pokemons.isCached);
+  const isLoading = useSelector((state: IAppState) => state.pokemons.isLoading);
+  const search = useSelector((state: IAppState) => state.pokemons.search);
+
+  const onChangeSearch = ({
+    target: { value = "" }
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(pokemons.searchChanged(value));
+  };
+
   useEffect(() => {
-    if (!props.isCached) {
-      props.fetchPokemons();
+    if (!isCached) {
+      dispatch(thunks.fetchAllPokemons());
     }
-  });
+  }, []);
 
-  if (props.isLoading) {
+  if (isLoading) {
     return <HomeViewLoading />;
   }
 
@@ -29,8 +40,8 @@ export const HomeView: React.FC<IHomeViewProps> = props => {
       <SearchBar
         placeholder="Search pokemon by name"
         type="search"
-        value={props.search}
-        onChange={props.handleSearchChange}
+        value={search}
+        onChange={onChangeSearch}
       />
 
       <FilterByType />

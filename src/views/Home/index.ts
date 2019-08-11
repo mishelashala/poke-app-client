@@ -1,1 +1,1 @@
-export { HomeViewContainer as HomeView } from "./container";
+export { HomeView } from "./Home";
