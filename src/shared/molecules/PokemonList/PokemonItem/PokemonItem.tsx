@@ -25,7 +25,7 @@ export const PokemonItem: React.FC<IPokemonItemProps> = props => {
   });
 
   return (
-    <Link to={`/pokemon/${props.name}`}>
+    <Link to={`/pokemons/${props.name}`}>
       <PokemonCard>
         {props.isLoading && <LoadingImage />}
 

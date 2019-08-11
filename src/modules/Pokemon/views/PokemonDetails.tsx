@@ -1,21 +1,21 @@
 import React, { useEffect } from "react";
-import { PokemonCard } from "../../shared/atoms/PokemonCard";
-import { PokemonDetails } from "../../shared/atoms/PokemonDetails";
-import { ViewTitle } from "../../shared/atoms/ViewTitle";
-import { TypeList } from "../../shared/molecules/TypeList";
-import { DetailsText } from "./atoms/DetailsText";
-import { PokemonDetailsLoading } from "./molecules/PokemonDetailsLoading";
+import { PokemonCard } from "../../../shared/atoms/PokemonCard";
+import { PokemonDetails } from "../../../shared/atoms/PokemonDetails";
+import { ViewTitle } from "../../../shared/atoms/ViewTitle";
+import { TypeList } from "../../../shared/molecules/TypeList";
+import { DetailsText } from "../atoms/DetailsText";
+import { PokemonDetailsLoading } from "../molecules/PokemonDetailsLoading";
 import { useDispatch, useSelector } from "react-redux";
-import { IPokemonDetailsThunks } from "../../ducks/pokemons";
-import { IPokemonDetails } from "../../shared/models/PokemonDetails";
-import * as selectors from "./selectors";
+import { IPokemonDetailsThunks } from "../../../ducks/pokemons";
+import { IPokemonDetails } from "../../../shared/models/PokemonDetails";
+import * as selectors from "../selectors";
 import { path, defaultTo } from "lodash/fp";
-import { PokemonName } from "./atoms/PokemonName";
-import { PokemonDetailsWrapper } from "./atoms/PokemonDetailsWrapper";
-import { DetailsViewTitle } from "./atoms/DetailsViewTitle";
-import { TypeListWrapper } from "./atoms/TypeListWrapper";
-import { AbilityList } from "./molecules/AbilityList";
-import { MovementList } from "./molecules/MovementList";
+import { PokemonName } from "../atoms/PokemonName";
+import { PokemonDetailsWrapper } from "../atoms/PokemonDetailsWrapper";
+import { DetailsViewTitle } from "../atoms/DetailsViewTitle";
+import { TypeListWrapper } from "../atoms/TypeListWrapper";
+import { AbilityList } from "../molecules/AbilityList";
+import { MovementList } from "../molecules/MovementList";
 
 export interface IPokemonDetailsViewProps {
   match: {
@@ -48,6 +48,7 @@ export const PokemonDetailsViewFactory = (
       [pokemonName]
     );
 
+    console.log(props.match);
     if (isLoading) {
       return <PokemonDetailsLoading />;
     }

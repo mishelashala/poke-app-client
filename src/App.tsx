@@ -8,7 +8,6 @@ import {
 import { Provider } from "react-redux";
 import { NavBar } from "./shared/molecules/NavBar";
 import { PokemonRouter } from "./modules/Pokemon/PokemonRouter";
-import { PokemonDetailsView } from "./views/PokemonDetails";
 import { configureStore } from "./configureStore";
 
 const App = () => (
@@ -20,10 +19,9 @@ const App = () => (
           <Route
             path="/"
             exact={true}
-            component={() => <Redirect to="/pokemons" />}
+            component={() => <Redirect to="/pokemons/" />}
           />
           <Route path="/pokemons/" component={PokemonRouter} />
-          <Route path="/pokemon/:pokemonName" component={PokemonDetailsView} />
         </Switch>
       </React.Fragment>
     </Router>
