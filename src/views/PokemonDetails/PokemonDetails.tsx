@@ -12,6 +12,11 @@ import {
   DetailsTypeWrapper
 } from "./ui";
 import { PokemonDetailsLoading } from "./PokemonDetailsLoading";
+import { useDispatch, useSelector } from "react-redux";
+import apiGateway from "../../gateways/HttpApiGateway";
+import * as pokemons from "../../ducks/pokemons";
+import { PokemonDetailsService } from "../../services/PokemonDetailsService";
+import { IAppState } from "../../ducks";
 
 export interface IPokemonDetailsViewProps {
   match: {
@@ -19,21 +24,37 @@ export interface IPokemonDetailsViewProps {
       pokemonName: string;
     };
   };
-  data: IPokemonDetails;
-  pokemonName: string;
-  getPokemonDetails: any;
-  isLoading: boolean;
-  isCached: boolean;
 }
 
 export const PokemonDetailsView: React.FC<IPokemonDetailsViewProps> = props => {
-  useEffect(() => {
-    if (!props.isCached) {
-      props.getPokemonDetails(props.pokemonName);
-    }
-  });
+  const pokemonName = props.match.params.pokemonName.toLocaleLowerCase();
+  const data = useSelector(
+    (state: IAppState) => state.pokemons.data[pokemonName] || {}
+  );
+  const isLoading = useSelector(
+    (state: IAppState) =>
+      Object.keys(state.pokemons.data).length === 0 ||
+      state.pokemons.data[pokemonName]._meta.isLoading
+  );
+  const isCached = useSelector(
+    (state: IAppState) =>
+      Object.keys(state.pokemons.data).length !== 0 &&
+      state.pokemons.data[pokemonName]._meta.isCached
+  );
+  const dispatch = useDispatch();
+  const pokemonDetailsService = PokemonDetailsService(apiGateway);
+  const thunks = pokemons.pokemonDeailsThunks(pokemonDetailsService);
 
-  if (props.isLoading) {
+  useEffect(
+    () => {
+      if (!isCached) {
+        dispatch(thunks.fetchPokemonDetailsByName(pokemonName));
+      }
+    },
+    [pokemonName]
+  );
+
+  if (isLoading) {
     return <PokemonDetailsLoading />;
   }
 
@@ -42,29 +63,29 @@ export const PokemonDetailsView: React.FC<IPokemonDetailsViewProps> = props => {
       <ViewTitle>Pokemon Details</ViewTitle>
       <div style={{ boxSizing: "border-box", textAlign: "center" }}>
         <PokemonCard>
-          <img src={props.data.picture} />
+          <img src={data.picture} />
           <PokemonDetails>
-            <Name>{props.data.name}</Name>
-            <DetailsText>Height: {props.data.height}'</DetailsText>
-            <DetailsText>Weight: {props.data.weight}kgs</DetailsText>
+            <Name>{data.name}</Name>
+            <DetailsText>Height: {data.height}'</DetailsText>
+            <DetailsText>Weight: {data.weight}kgs</DetailsText>
           </PokemonDetails>
         </PokemonCard>
 
         <DetailsViewTitle>Type</DetailsViewTitle>
         <TypeListWrapper>
-          <TypeList data={props.data.types} />
+          <TypeList data={data.types} />
         </TypeListWrapper>
 
         <DetailsViewTitle>Abilities</DetailsViewTitle>
         <DetailsTypeWrapper>
-          {props.data.abilities.map((ability: string) => {
+          {data.abilities.map((ability: string) => {
             return <AbilityLabel key={ability}>{ability}</AbilityLabel>;
           })}
         </DetailsTypeWrapper>
 
         <DetailsViewTitle>Moves</DetailsViewTitle>
         <DetailsTypeWrapper>
-          {props.data.moves.map((move: string) => {
+          {data.moves.map((move: string) => {
             return <AbilityLabel key={move}>{move}</AbilityLabel>;
           })}
         </DetailsTypeWrapper>
