@@ -1,6 +1,6 @@
 import { capitalize } from "lodash";
-import { IPokemonDto } from "../shared/dtos/PokemonDto";
-import { IPokemon } from "../shared/models/Pokemon";
+import { IPokemonDto } from "../dtos/PokemonDto";
+import { IPokemon } from "../models/Pokemon";
 
 const toEntity = (pokemonDto: IPokemonDto): IPokemon => {
   return {

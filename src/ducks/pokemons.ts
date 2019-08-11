@@ -2,8 +2,8 @@ import { Dispatch } from "redux";
 import { IFluxStandardAction } from "../shared/models/FluxStandardAction";
 import { IPokemon } from "../shared/models/Pokemon";
 import { IPokemonDetails } from "../shared/models/PokemonDetails";
-import { IPokemonService } from "../services/PokemonService";
-import { IPokemonDetailsService } from "../services/PokemonDetailsService";
+import { IPokemonService } from "../shared/services/PokemonService";
+import { IPokemonDetailsService } from "../shared/services/PokemonDetailsService";
 import { serialize } from "../utils/serialize";
 import { assoc, pipe, assocPath } from "lodash/fp";
 

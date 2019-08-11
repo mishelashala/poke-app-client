@@ -1,4 +1,4 @@
-import { IPokemon } from "../shared/models/Pokemon";
+import { IPokemon } from "../models/Pokemon";
 import pokemonMapper from "../mappers/PokemonMapper";
 import * as serviceErrorStrategy from "../strategies/ServiceErrorStrategy";
 

@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import { PokemonList } from "./PokemonList";
 import { getPokemons, getError } from "./selector";
-import apiGateway from "../../../gateways/HttpApiGateway";
-import { PokemonService } from "../../../services/PokemonService";
+import apiGateway from "../../gateways/HttpApiGateway";
+import { PokemonService } from "../../services/PokemonService";
 import { pokemonThunks } from "../../../ducks/pokemons";
 
 const pokemonService = PokemonService(apiGateway);

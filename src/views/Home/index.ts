@@ -1,6 +1,6 @@
 import { HomeViewFactory } from "./Home";
-import apiGateway from "../../gateways/HttpApiGateway";
-import { PokemonService } from "../../services/PokemonService";
+import apiGateway from "../../shared/gateways/HttpApiGateway";
+import { PokemonService } from "../../shared/services/PokemonService";
 import * as pokemons from "../../ducks/pokemons";
 
 const pokemonService = PokemonService(apiGateway);

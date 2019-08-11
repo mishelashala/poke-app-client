@@ -1,6 +1,6 @@
-import apiGateway from "../../gateways/HttpApiGateway";
+import apiGateway from "../../shared/gateways/HttpApiGateway";
 import * as pokemons from "../../ducks/pokemons";
-import { PokemonDetailsService } from "../../services/PokemonDetailsService";
+import { PokemonDetailsService } from "../../shared/services/PokemonDetailsService";
 import { IPokemonDetails } from "../../shared/models/PokemonDetails";
 
 export interface IPokemonDetails {
