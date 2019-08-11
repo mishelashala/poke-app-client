@@ -12,7 +12,7 @@ export const PokemonList = PokemonListViewFactory(pokemonThunks);
 
 export const PokemonRouter = () => (
   <React.Fragment>
-    <Route path="/" component={PokemonList} exact={true} />
+    <Route path="/" component={PokemonList} />
     {/* <Route path="/" component={PokemonDetail} exact={true} /> */}
   </React.Fragment>
 );
