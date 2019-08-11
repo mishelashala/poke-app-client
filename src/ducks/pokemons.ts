@@ -1,3 +1,4 @@
+import { Dispatch } from "redux";
 import { IFluxStandardAction, IPokemon, IPokemonDetails } from "../models/";
 import { IPokemonService } from "../services/PokemonService";
 import { IPokemonDetailsService } from "../services/PokemonDetailsService";
@@ -99,10 +100,16 @@ export const filterByTypeChanged = (types: string[]) => ({
 
 // THUNKS
 
+export interface IPokemonThunks {
+  fetchAllPokemons: () => (d: Dispatch) => Promise<void>;
+}
+
 // pokemonThunks :: IPokemonService -> IPokemonThunks
-export const pokemonThunks = (pokemonService: IPokemonService) => {
+export const pokemonThunks = (
+  pokemonService: IPokemonService
+): IPokemonThunks => {
   // fetchAllPokemons :: () -> ReduxThunk
-  const fetchAllPokemons = () => async (dispatch: Function) => {
+  const fetchAllPokemons = () => async (dispatch: Dispatch) => {
     try {
       dispatch(fetchAllStarted());
       const data = await pokemonService.getAll();
