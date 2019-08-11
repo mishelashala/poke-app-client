@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import fp from "lodash/fp";
-import { filterByTypeChanged } from "../../../ducks/pokemons";
+import { filterByTypeChanged } from "../../../shared/ducks/pokemons";
 import { IFilterByTypeOption } from "./index";
 import { FilterByType } from "./FilterByType";
 

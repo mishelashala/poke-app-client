@@ -5,7 +5,7 @@ import apiGateway from "../../shared/gateways/HttpApiGateway";
 import { PokemonService } from "../../shared/services/PokemonService";
 import { PokemonDetailsService } from "../../shared/services/PokemonDetailsService";
 import { PokemonDetailsViewFactory } from "./views/PokemonDetails";
-import * as pokemons from "../../ducks/pokemons";
+import * as pokemons from "../../shared/ducks/pokemons";
 
 const pokemonService = PokemonService(apiGateway);
 const pokemonThunks = pokemons.pokemonThunks(pokemonService);

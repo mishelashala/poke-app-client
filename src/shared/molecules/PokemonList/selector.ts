@@ -1,5 +1,5 @@
 import { lowerCase } from "lodash/fp";
-import { IAppState } from "../../../ducks";
+import { IAppState } from "../../../shared/ducks";
 import { IPokemon } from "../../models/Pokemon";
 
 // toArray :: {[key: string]: T} -> T[]

@@ -1,5 +1,5 @@
 import { path } from "lodash/fp";
-import { IAppState } from "../../ducks";
+import { IAppState } from "../../shared/ducks";
 import { IPokemonDetails } from "../../shared/models/PokemonDetails";
 
 export const selectIsCached = path(["pokemons", "isCached"]);

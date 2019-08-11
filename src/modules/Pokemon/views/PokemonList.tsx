@@ -6,7 +6,7 @@ import { ViewTitle } from "../../../shared/atoms/ViewTitle";
 import { SearchBar } from "../../../shared/atoms/SearchBar";
 import { Wrapper } from "../../../shared/atoms/Wrapper";
 import { HomeViewLoading } from "../molecules/HomeViewLoading";
-import * as pokemonDucks from "../../../ducks/pokemons";
+import * as pokemonDucks from "../../../shared/ducks/pokemons";
 import * as pokemonSelector from "../selectors";
 
 export const PokemonListViewFactory = (
