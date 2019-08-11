@@ -1,1 +1,1 @@
-export { PokemonListContainer as PokemonList } from "./container";
+export { PokemonList } from "./PokemonList";

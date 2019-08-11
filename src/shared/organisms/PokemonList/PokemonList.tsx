@@ -1,35 +1,25 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Text } from "../../atoms/Text";
-import { Retry } from "../../atoms/Retry";
 import { PokemonItem } from "../PokemonItem";
 import { IPokemon } from "../../models/Pokemon";
+import * as pokemonSelector from "./selector";
 
-interface IPokemonListProps {
-  isLoading: boolean;
-  data: IPokemon[];
-  error: string;
-  onClickRetry: () => any;
-}
+export const PokemonList: React.SFC = () => {
+  const data = useSelector(pokemonSelector.getPokemons);
+  const error = useSelector(pokemonSelector.getError);
 
-export const PokemonList: React.FunctionComponent<
-  IPokemonListProps
-> = props => {
-  if (props.error) {
-    return (
-      <div>
-        <Text>{props.error}</Text>
-        <Retry onClick={props.onClickRetry}>click to try again</Retry>
-      </div>
-    );
+  if (error) {
+    return <Text>We couldn't load the pokemon list, try later :(</Text>;
   }
 
-  if (!props.data.length) {
+  if (!data.length) {
     return <Text>There are no pokemons to show :'(</Text>;
   }
 
   return (
-    <section style={{ textAlign: "center" }}>
-      {props.data.map((pokemon: IPokemon) => (
+    <React.Fragment>
+      {data.map((pokemon: IPokemon) => (
         <PokemonItem
           key={pokemon.name}
           name={pokemon.name}
@@ -39,6 +29,6 @@ export const PokemonList: React.FunctionComponent<
           isCached={pokemon._meta.isCached}
         />
       ))}
-    </section>
+    </React.Fragment>
   );
 };
