@@ -6,7 +6,7 @@ import {
   Redirect
 } from "react-router-dom";
 import { Provider } from "react-redux";
-import { NavBar } from "./shared/molecules/NavBar";
+import { NavBar } from "./shared/organisms/NavBar";
 import { PokemonRouter } from "./modules/Pokemon/PokemonRouter";
 import { configureStore } from "./configureStore";
 

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { PokemonCard } from "../../../shared/atoms/PokemonCard";
 import { PokemonDetails } from "../../../shared/atoms/PokemonDetails";
 import { ViewTitle } from "../../../shared/atoms/ViewTitle";
-import { TypeList } from "../../../shared/molecules/TypeList";
+import { TypeList } from "../../../shared/organisms/TypeList";
 import { DetailsText } from "../atoms/DetailsText";
 import { PokemonDetailsLoading } from "../molecules/PokemonDetailsLoading";
 import { useDispatch, useSelector } from "react-redux";

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { PokemonList } from "../../../shared/molecules/PokemonList";
-import { FilterByType } from "../../../shared/molecules/FilterByType";
+import { PokemonList } from "../../../shared/organisms/PokemonList";
+import { FilterByType } from "../../../shared/organisms/FilterByType";
 import { ViewTitle } from "../../../shared/atoms/ViewTitle";
 import { SearchBar } from "../../../shared/atoms/SearchBar";
 import { Wrapper } from "../../../shared/atoms/Wrapper";
