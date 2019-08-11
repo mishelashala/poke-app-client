@@ -1,3 +1,8 @@
+import apiGateway from "../../gateways/HttpApiGateway";
+import * as pokemons from "../../ducks/pokemons";
+import { PokemonDetailsService } from "../../services/PokemonDetailsService";
+import { IPokemonDetails } from "../../models/";
+
 export interface IPokemonDetails {
   name: string;
   sprites: {
@@ -5,4 +10,12 @@ export interface IPokemonDetails {
   };
 }
 
-export { PokemonDetailsView } from "./PokemonDetails";
+import { PokemonDetailsViewFactory } from "./PokemonDetails";
+const pokemonDetailsService = PokemonDetailsService(apiGateway);
+const pokemonDetailsThunks = pokemons.pokemonDeailsThunks(
+  pokemonDetailsService
+);
+
+export const PokemonDetailsView = PokemonDetailsViewFactory(
+  pokemonDetailsThunks
+);

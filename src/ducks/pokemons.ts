@@ -122,6 +122,10 @@ export const pokemonThunks = (
   return { fetchAllPokemons };
 };
 
+export interface IPokemonDetailsThunks {
+  fetchPokemonDetailsByName: (pn: string) => (d: Dispatch) => Promise<void>;
+}
+
 // pokemonDeailsThunks :: IPokemonDetailsService
 export const pokemonDeailsThunks = (
   pokemonDetailsService: IPokemonDetailsService
