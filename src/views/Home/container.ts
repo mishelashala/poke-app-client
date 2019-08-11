@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import apiGateway from "../../api-gateways/HttpApiGateway";
+import apiGateway from "../../gateways/HttpApiGateway";
 import { PokemonService } from "../../services/PokemonService";
 import { IAppState } from "../../ducks";
 import * as pokemons from "../../ducks/pokemons";
