@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { PokemonList } from "../../modules/PokemonList";
 import { FilterByType } from "../../modules/FilterByType";
 import { ViewTitle, SearchBar, Wrapper } from "../../ui/";
-import { HomeViewLoading } from "./HomeViewLoading";
+import { HomeViewLoading } from "./molecules/HomeViewLoading";
 import * as pokemonDucks from "../../ducks/pokemons";
 import * as pokemonSelector from "./selectors";
 

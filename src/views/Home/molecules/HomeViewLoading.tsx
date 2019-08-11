@@ -1,5 +1,5 @@
 import React from "react";
-import { LoadingCard, LoadingTitle, Wrapper } from "../../ui/";
+import { LoadingCard, LoadingTitle, Wrapper } from "../../../ui";
 
 export const HomeViewLoading = () => (
   <Wrapper>
