@@ -8,12 +8,12 @@ import { IPokemonDetailsThunks } from "../../ducks/pokemons";
 import { IPokemonDetails } from "../../models";
 import * as selectors from "./selectors";
 import { path, defaultTo } from "lodash/fp";
-import { DetailsTypeWrapper } from "./atoms/DetailsWrapper";
 import { PokemonName } from "./atoms/PokemonName";
 import { PokemonDetailsWrapper } from "./atoms/PokemonDetailsWrapper";
 import { DetailsViewTitle } from "./atoms/DetailsViewTitle";
 import { TypeListWrapper } from "./atoms/TypeListWrapper";
-import { AbilityLabel } from "./atoms/AbilityLabel";
+import { AbilityList } from "./molecules/AbilityList";
+import { MovementList } from "./molecules/MovementList";
 
 export interface IPokemonDetailsViewProps {
   match: {
@@ -53,39 +53,26 @@ export const PokemonDetailsViewFactory = (
     return (
       <PokemonDetailsWrapper>
         <ViewTitle>Pokemon Details</ViewTitle>
-        <div style={{ boxSizing: "border-box", textAlign: "center" }}>
-          <PokemonCard>
-            <img src={data.picture} />
-            <PokemonDetails>
-              <PokemonName>{data.name}</PokemonName>
-              <DetailsText>Height: {data.height}'</DetailsText>
-              <DetailsText>Weight: {data.weight}kgs</DetailsText>
-            </PokemonDetails>
-          </PokemonCard>
 
-          <DetailsViewTitle>Type</DetailsViewTitle>
-          <TypeListWrapper>
-            <TypeList data={data.types} />
-          </TypeListWrapper>
+        <PokemonCard>
+          <img src={data.picture} />
+          <PokemonDetails>
+            <PokemonName>{data.name}</PokemonName>
+            <DetailsText>Height: {data.height}'</DetailsText>
+            <DetailsText>Weight: {data.weight}kgs</DetailsText>
+          </PokemonDetails>
+        </PokemonCard>
 
-          <DetailsViewTitle>Abilities</DetailsViewTitle>
-          <DetailsTypeWrapper>
-            {defaultTo([] as string[], path("abilities", data)).map(
-              (ability: string) => {
-                return <AbilityLabel key={ability}>{ability}</AbilityLabel>;
-              }
-            )}
-          </DetailsTypeWrapper>
+        <DetailsViewTitle>Type</DetailsViewTitle>
+        <TypeListWrapper>
+          <TypeList data={data.types} />
+        </TypeListWrapper>
 
-          <DetailsViewTitle>Moves</DetailsViewTitle>
-          <DetailsTypeWrapper>
-            {defaultTo([] as string[], path("moves", data)).map(
-              (move: string) => {
-                return <AbilityLabel key={move}>{move}</AbilityLabel>;
-              }
-            )}
-          </DetailsTypeWrapper>
-        </div>
+        <AbilityList
+          data={defaultTo([] as string[], path("abilities", data))}
+        />
+
+        <MovementList data={defaultTo([] as string[], path("moves", data))} />
       </PokemonDetailsWrapper>
     );
   };
