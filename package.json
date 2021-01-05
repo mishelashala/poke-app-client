@@ -16,7 +16,7 @@
     "@types/redux-logger": "^3.0.6",
     "@types/redux-thunk": "^2.1.0",
     "@types/styled-components": "^4.1.6",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "lodash": "^4.17.13",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
